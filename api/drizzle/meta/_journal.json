@@ -29,6 +29,20 @@
       "when": 1764619923566,
       "tag": "0003_typical_marrow",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1764699569781,
+      "tag": "0004_loving_triton",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1764700588008,
+      "tag": "0005_stale_golden_guardian",
+      "breakpoints": true
     }
   ]
 }

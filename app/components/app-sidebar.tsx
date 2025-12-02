@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Home, PawPrint, Users } from "lucide-react";
+import { CircleCheckBig, Home, PawPrint, Users } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -47,6 +47,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <Link href="/dashboard/adopters">
                   <Users />
                   <span>Adopters</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          )}
+          {session?.user?.tasks && (
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href="/dashboard/tasks">
+                  <CircleCheckBig />
+                  <span>Tasks</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

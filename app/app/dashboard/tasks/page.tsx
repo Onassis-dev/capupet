@@ -12,29 +12,29 @@ import { useSelectedRow } from "@/hooks/use-selected-row";
 import { useState } from "react";
 import DeleteDialog from "@/components/DeleteDialog";
 import { useI18n } from "@/hooks/use-i18n";
-import { AdoptersForm } from "./AdoptersForm";
+import { TasksForm } from "./TasksForm";
 
 export default function Page() {
   const t = useI18n({
-    name: {
-      es: "Nombre",
-      en: "Name",
+    title: {
+      es: "Título",
+      en: "Title",
     },
-    phone: {
-      es: "Teléfono",
-      en: "Phone",
+    due: {
+      es: "Fecha",
+      en: "Due",
     },
     deleteTitle: {
-      es: "Eliminar adoptante",
-      en: "Delete Adopter",
+      es: "Eliminar tarea",
+      en: "Delete Task",
     },
     deleteText: {
-      es: "¿Estás seguro de querer eliminar este adoptante?",
-      en: "Are you sure you want to delete this adopter?",
+      es: "¿Estás seguro de querer eliminar esta tarea?",
+      en: "Are you sure you want to delete this task?",
     },
     deleteSuccessMessage: {
-      es: "Adoptante eliminado correctamente",
-      en: "Adopter deleted successfully",
+      es: "Tarea eliminada correctamente",
+      en: "Task deleted successfully",
     },
   });
 
@@ -45,10 +45,10 @@ export default function Page() {
   const [openEdit, setOpenEdit] = useState(false);
 
   const { data, status } = useQuery({
-    queryKey: ["adopters", debouncedFilter, page],
+    queryKey: ["tasks", debouncedFilter, page],
     queryFn: () =>
       get(
-        api.adopters.$get({
+        api.tasks.$get({
           query: { text: debouncedFilter, page: String(page) },
         })
       ),
@@ -61,21 +61,18 @@ export default function Page() {
           onChange={(e) => setFilter(e.target.value)}
         />
 
-        <AdoptersForm
+        <TasksForm
           open={openEdit}
           setOpen={setOpenEdit}
-          setSelectedAdopter={setSelectedRow}
-          adopter={selectedRow}
+          setSelectedTask={setSelectedRow}
+          task={selectedRow}
         />
       </OptionsGrid>
 
       <CrudTable
         rows={data?.rows}
         status={status}
-        columns={[
-          { key: "name", title: t("name") },
-          { key: "phone", title: t("phone"), hide: true },
-        ]}
+        columns={[{ key: "title", title: t("title") }]}
         selectRow={setSelectedRow}
         setOpenDelete={setOpenDelete}
         setOpenEdit={setOpenEdit}
@@ -97,9 +94,9 @@ export default function Page() {
         text={t("deleteText")}
         open={openDelete}
         setOpen={setOpenDelete}
-        queryKey="adopters"
+        queryKey="tasks"
         deleteFunction={() =>
-          get(api.adopters.$delete({ json: { id: Number(selectedRow?.id) } }))
+          get(api.tasks.$delete({ json: { id: Number(selectedRow?.id) } }))
         }
         successMessage={t("deleteSuccessMessage")}
       />

@@ -98,7 +98,7 @@ export const permissionsList = {
   users: boolean().default(false).notNull(),
   pets: boolean().default(false).notNull(),
   adopters: boolean().default(false).notNull(),
-  calendar: boolean().default(false).notNull(),
+  tasks: boolean().default(false).notNull(),
   website: boolean().default(false).notNull(),
   inventory: boolean().default(false).notNull(),
   finances: boolean().default(false).notNull(),

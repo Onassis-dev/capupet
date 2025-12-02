@@ -5,6 +5,7 @@ import { usersRoute } from "./routes/users/users.route";
 import { organizationsRoute } from "./routes/organizations/organizations.route";
 import { petsRoute } from "./routes/pets/pets.route";
 import { adoptersRoute } from "./routes/adopters/adopters.route";
+import { tasksRoute } from "./routes/tasks/tasks.route";
 
 export type Variables = {
   userId: string;
@@ -31,6 +32,7 @@ const app = new Hono<{ Variables: Variables }>()
 
   .route("/pets", petsRoute)
   .route("/adopters", adoptersRoute)
+  .route("/tasks", tasksRoute)
   .route("/users", usersRoute)
   .route("/organizations", organizationsRoute);
 

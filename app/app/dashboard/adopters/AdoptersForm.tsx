@@ -16,7 +16,7 @@ import { z } from "zod/v4";
 import { api, get } from "@/lib/api";
 import { useI18n } from "@/hooks/use-i18n";
 import { ModalForm } from "@/components/ModalForm";
-import { updateAdopterSchema } from "@server/routes/adopters/adopters.schema";
+import { adopterSchema } from "@server/routes/adopters/adopters.schema";
 import { Textarea } from "@/components/ui/textarea";
 
 interface props {
@@ -26,7 +26,7 @@ interface props {
   setSelectedAdopter: (adopter: Record<string, unknown> | null) => void;
 }
 
-const defaultValues: z.infer<typeof updateAdopterSchema> = {
+const defaultValues: z.infer<typeof adopterSchema> = {
   id: 0,
   name: "",
   email: "",
@@ -82,15 +82,13 @@ export const AdoptersForm = ({
     },
   });
 
-  const adoptersForm = useForm<z.infer<typeof updateAdopterSchema>>({
-    resolver: zodResolver(updateAdopterSchema),
+  const adoptersForm = useForm<z.infer<typeof adopterSchema>>({
+    resolver: zodResolver(adopterSchema),
     defaultValues: defaultValues,
   });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async function sendData(
-      values: z.infer<typeof updateAdopterSchema>
-    ) {
+    mutationFn: async function sendData(values: z.infer<typeof adopterSchema>) {
       if (adopter)
         await get(
           api.adopters.$put({ json: { ...values, id: Number(adopter.id) } })
@@ -108,7 +106,7 @@ export const AdoptersForm = ({
   }, [adopter, adoptersForm]);
 
   const submit = adoptersForm.handleSubmit(
-    (values: z.infer<typeof updateAdopterSchema>) => mutate(values)
+    (values: z.infer<typeof adopterSchema>) => mutate(values)
   );
 
   return (

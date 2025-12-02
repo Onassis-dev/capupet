@@ -8,12 +8,16 @@ export const searchAdoptersSchema = z.object({
 
 export const createAdopterSchema = z.object({
   name: z.string().min(1),
-  email: emailSchema,
-  phone: z.string().nullable(),
-  address: z.string().nullable(),
-  notes: z.string().nullable(),
+  email: emailSchema.nullable(),
+  phone: z.string().nullable().optional(),
+  address: z.string().nullable().optional(),
+  notes: z.string().nullable().optional(),
 });
 
 export const updateAdopterSchema = createAdopterSchema.extend({
   id: idSchema,
+});
+
+export const adopterSchema = createAdopterSchema.extend({
+  id: z.number(),
 });
