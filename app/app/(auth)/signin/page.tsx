@@ -140,7 +140,7 @@ export default function Page() {
                       {t("password")}
                       <Link
                         href="/forgot-password"
-                        className="cursor-pointer text-sm font-normal text-right"
+                        className="cursor-pointer text-sm text-right"
                       >
                         {t("forgotPassword")}
                       </Link>

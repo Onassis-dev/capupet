@@ -99,7 +99,7 @@ export default function Page() {
   return (
     <main className="w-full flex flex-col items-center px-4">
       <div className="text-center max-w-sm">
-        <h1 className="text-3xl font-medium">{t("welcome")}</h1>
+        <h1 className="text-3xl">{t("welcome")}</h1>
         <p className="text-sm text-muted-foreground mb-6">
           {t("welcomeDescription")}
         </p>

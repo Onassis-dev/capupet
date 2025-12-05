@@ -117,11 +117,20 @@ function AlertDialogDescription({
 
 function AlertDialogAction({
   className,
+  variant = "destructive",
   ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Action>) {
+}: React.ComponentProps<typeof AlertDialogPrimitive.Action> & {
+  variant?:
+    | "destructive"
+    | "default"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link";
+}) {
   return (
     <AlertDialogPrimitive.Action
-      className={cn(buttonVariants({ variant: "destructive" }), className)}
+      className={cn(buttonVariants({ variant }), className)}
       {...props}
     />
   );

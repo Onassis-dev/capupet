@@ -19,18 +19,6 @@ import { Logout } from "@/components/Logout";
 
 export function SelectOrganization() {
   const t = useI18n({
-    planFree: {
-      es: "Plan gratuito",
-      en: "Free plan",
-    },
-    planBase: {
-      es: "Plan base",
-      en: "Base plan",
-    },
-    planAdvanced: {
-      es: "Plan avanzado",
-      en: "Advanced plan",
-    },
     configuration: {
       es: "Configuración",
       en: "Configuration",
@@ -62,12 +50,6 @@ export function SelectOrganization() {
     },
   });
 
-  const planNames = {
-    0: t("planFree"),
-    1: t("planBase"),
-    2: t("planAdvanced"),
-  };
-
   return (
     <>
       <Popover open={open} onOpenChange={setOpen}>
@@ -77,7 +59,7 @@ export function SelectOrganization() {
 
             <AvatarFallback>{session?.user?.orgName?.[0]}</AvatarFallback>
           </Avatar>
-          <div className="text-start flex flex-col gap-1 text-sm font-medium text-ellipsis overflow-hidden whitespace-nowrap max-w-[17ch]">
+          <div className="text-start flex flex-col gap-1 text-sm font-bold text-ellipsis overflow-hidden whitespace-nowrap max-w-[17ch] text-foreground">
             {session?.user?.orgName}
           </div>
           <ChevronsUpDown className="h-4 w-4 text-muted-foreground" />
@@ -95,11 +77,8 @@ export function SelectOrganization() {
               <AvatarFallback>{session?.user?.orgName?.[0]}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col min-w-0">
-              <span className="text-sm font-medium overflow-hidden text-ellipsis whitespace-nowrap block">
+              <span className="text-sm font-bold overflow-hidden text-ellipsis whitespace-nowrap block">
                 {session?.user?.orgName}
-              </span>
-              <span className="text-xs text-muted-foreground">
-                {planNames[session?.user?.plan as keyof typeof planNames]}
               </span>
             </div>
             <div className="flex gap-2 col-span-2">
@@ -130,7 +109,7 @@ export function SelectOrganization() {
             </div>
           </div>
 
-          <div className="p-1 border-b">
+          <div className="p-2 border-b">
             {session?.orgs?.map((org) => (
               <Button
                 key={org.id}
@@ -139,7 +118,7 @@ export function SelectOrganization() {
                   setOpen(false);
                 }}
                 variant="ghost"
-                className="w-full h-auto px-2 py-1 grid grid-cols-[1.5rem_1fr_1rem] gap-2 text-left font-normal"
+                className="w-full font-medium text-sm h-auto p-1 grid grid-cols-[1.5rem_1fr_1rem] gap-2 text-left"
               >
                 <Avatar className="rounded-lg size-6">
                   <AvatarFallback className="rounded-lg bg-primary/10 text-foreground">
@@ -156,17 +135,17 @@ export function SelectOrganization() {
             ))}
             <Button
               variant="ghost"
-              className="w-full h-auto px-2 py-1 text-blue-700 grid grid-cols-[1.5rem_1fr] gap-2 text-left font-normal"
+              className="w-full font-medium text-sm h-auto p-1 text-sidebar-primary-foreground grid grid-cols-[1.5rem_1fr] gap-2 text-left"
               onClick={() => setOpenOrganization(true)}
             >
               <PlusIcon className="size-4 mx-auto" />
               {t("registerOrganization")}
             </Button>
           </div>
-          <div className="p-1">
+          <div className="p-2">
             <Button
               variant="ghost"
-              className="w-full h-auto px-2 py-1 grid grid-cols-[1.5rem_1fr] gap-2 text-left font-normal text-muted-foreground"
+              className="w-full font-medium text-sm h-auto p-1 grid grid-cols-[1.5rem_1fr] gap-2 text-left text-muted-foreground"
               onClick={() => setOpenLogout(true)}
             >
               <LogOutIcon className="size-4 mx-auto" />

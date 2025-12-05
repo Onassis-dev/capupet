@@ -5,11 +5,9 @@
 
 :root {
   --background: hsl(0 0% 99.5%);
-  --foreground: hsl(0 0% 12%);
+  --foreground: hsl(0 0% 24%);
   --card: hsl(0 0% 99%);
   --card-foreground: hsl(0 0% 12%);
-  --popover: hsl(0 0% 99%);
-  --popover-foreground: hsl(0 0% 12%);
   --primary: var(--color-blue-600);
   --primary-foreground: hsl(0 0% 100%);
   --secondary: var(--color-blue-100);
@@ -27,7 +25,7 @@
   --chart-3: hsl(0 0% 91%);
   --chart-4: hsl(34 100% 89%);
   --chart-5: hsl(17 22% 32%);
-  --sidebar: #f7f7f7;
+  --sidebar: #f6f6f6;
   --sidebar-foreground: #505050;
   --sidebar-primary: var(--color-blue-100);
   --sidebar-primary-foreground: var(--color-blue-700);
@@ -55,8 +53,6 @@
   --foreground: hsl(0 0% 93%);
   --card: hsl(0 0% 9%);
   --card-foreground: hsl(0 0% 93%);
-  --popover: hsl(0 0% 9%);
-  --popover-foreground: hsl(0 0% 93%);
   --primary: hsl(30 91% 87%);
   --primary-foreground: hsl(184 44% 7%);
   --secondary: hsl(30 18% 19%);
@@ -101,8 +97,6 @@
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
@@ -150,4 +144,8 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+body {
+  font-weight: 500;
 }

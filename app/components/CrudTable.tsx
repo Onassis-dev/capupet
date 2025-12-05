@@ -191,7 +191,7 @@ export const CrudTable = ({
                     strokeWidth={1.1}
                     className="size-10 mb-3 rounded-xl"
                   />
-                  <span className="font-medium mb-1">{t("noResults")}</span>
+                  <span className="mb-1">{t("noResults")}</span>
                   <span className="text-muted-foreground">
                     {t("noResultsText")}
                   </span>
@@ -219,7 +219,7 @@ export const CrudTable = ({
               <TableCell colSpan={100}>
                 <div className="w-full justify-center flex flex-col items-center text-muted-foreground h-40">
                   <Ban strokeWidth={1.2} className="size-12 mb-4" />
-                  <span className="font-medium">{t("errorText")}</span>
+                  <span>{t("errorText")}</span>
                 </div>
               </TableCell>
             </TableRow>

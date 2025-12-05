@@ -30,7 +30,7 @@ export default function Page() {
           className="size-12 text-muted-foreground"
           strokeWidth={1.5}
         />
-        <h1 className="text-2xl font-medium">{t("noConnection")}</h1>
+        <h1 className="text-2xl">{t("noConnection")}</h1>
         <Button onClick={handleRetry}>{t("retry")}</Button>
       </div>
     </main>

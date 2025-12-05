@@ -17,9 +17,7 @@ import Link from "next/link";
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar variant="inset" {...props}>
-      <SidebarHeader>
-        <SelectOrganization />
-      </SidebarHeader>
+      <SelectOrganization />
 
       <SidebarContent>
         <SidebarMenu>

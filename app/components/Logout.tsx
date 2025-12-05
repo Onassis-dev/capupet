@@ -12,6 +12,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useI18n } from "@/hooks/use-i18n";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { Button } from "./ui/button";
 
 type props = {
   open: boolean;
@@ -59,9 +60,9 @@ export const Logout = ({ setOpen, open }: props) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
-          <AlertDialogAction onClick={() => mutate()} disabled={isPending}>
+          <Button onClick={() => mutate()} disabled={isPending}>
             {t("confirm")}
-          </AlertDialogAction>
+          </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

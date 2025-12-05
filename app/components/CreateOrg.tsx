@@ -72,10 +72,10 @@ export const CreateOrganization = ({ open, setOpen }: props) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
-        <DialogHeader>
+        <DialogHeader className="p-6 pb-0">
           <DialogTitle>{t("createOrganization")}</DialogTitle>
         </DialogHeader>
-        <div>
+        <div className="p-6">
           <Form {...organizationForm}>
             <form className="" onSubmit={submitCreateOrganization}>
               <FormField
