@@ -18,14 +18,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const location = usePathname();
   return (
     <Sidebar variant="inset" {...props}>
-      <SelectOrganization />
-
       <SidebarContent>
+        <SelectOrganization />
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild isActive={isActive(location, undefined)}>
               <Link href="/dashboard">
-                <Home className="!size-5" strokeWidth={1.8} />
+                <Home className="size-5!" strokeWidth={1.8} />
                 <span>Home</span>
               </Link>
             </SidebarMenuButton>
@@ -34,7 +33,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={isActive(location, "pets")}>
                 <Link href="/dashboard/pets">
-                  <PawPrint className="!size-5" strokeWidth={1.8} />
+                  <PawPrint className="size-5!" strokeWidth={1.8} />
                   <span>Pets</span>
                 </Link>
               </SidebarMenuButton>
@@ -47,7 +46,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 isActive={isActive(location, "adopters")}
               >
                 <Link href="/dashboard/adopters">
-                  <Users className="!size-5" strokeWidth={1.8} />
+                  <Users className="size-5!" strokeWidth={1.8} />
                   <span>Adopters</span>
                 </Link>
               </SidebarMenuButton>
@@ -57,7 +56,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={isActive(location, "tasks")}>
                 <Link href="/dashboard/tasks">
-                  <CircleCheckBig className="!size-5" strokeWidth={1.8} />
+                  <CircleCheckBig className="size-5!" strokeWidth={1.8} />
                   <span>Tasks</span>
                 </Link>
               </SidebarMenuButton>
