@@ -25,12 +25,12 @@ export const petGeneralInfoSchema = z.object({
   name: z.string().min(1),
   species: z.enum(speciesArray),
   sex: z.enum(sexesArray),
-  admissionDate: dateSchema,
-  bornDate: dateSchema,
-  size: z.enum(sizeArray),
-  weight: z.string().nullable(),
-  measurement: z.enum(measurementsArray),
-  comments: z.string().nullable(),
+  admissionDate: dateSchema.nullish(),
+  bornDate: dateSchema.nullish(),
+  size: z.enum(sizeArray).nullish(),
+  weight: z.string().nullish(),
+  measurement: z.enum(measurementsArray).nullish(),
+  comments: z.string().nullish(),
   status: z.enum(statusArray),
 });
 

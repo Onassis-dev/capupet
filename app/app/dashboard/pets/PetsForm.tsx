@@ -23,7 +23,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
-import { SexOptions, SpeciesOptions } from "@/components/ui/select-options";
+import {
+  SexOptions,
+  SpeciesOptions,
+  StatusOptions,
+} from "@/components/ui/select-options";
 
 const defaultValues: z.infer<typeof createPetSchema> = {
   name: "",
@@ -172,7 +176,7 @@ export const PetsForm = () => {
                       <SelectValue />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent></SelectContent>
+                  <StatusOptions />
                 </Select>
                 <FormMessage />
               </FormItem>

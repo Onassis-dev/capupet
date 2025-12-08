@@ -16,18 +16,12 @@ import { z } from "zod/v4";
 import { showSuccess } from "@/lib/toast";
 import { useI18n, useLanguage } from "@/hooks/use-i18n";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DatePicker } from "@/components/DatePicker";
 import { SubmitButton } from "@/components/ui/custom-buttons";
 import { Textarea } from "@/components/ui/textarea";
-import { useEffect } from "react";
 import {
+  MeasurementOptions,
   SexOptions,
   SpeciesOptions,
   StatusOptions,
@@ -89,8 +83,14 @@ export const GeneralInfo = () => {
   const { id } = useParams();
   const client = useQueryClient();
 
+  const { data } = useQuery({
+    queryKey: ["pets", "general", id],
+    queryFn: () => get(api.pets.general.$get({ query: { id: String(id) } })),
+  });
+
   const petsForm = useForm<z.infer<typeof petGeneralInfoSchema>>({
     resolver: zodResolver(petGeneralInfoSchema),
+    values: data as z.infer<typeof petGeneralInfoSchema> | undefined,
     defaultValues: {
       id: 0,
       name: "",
@@ -105,19 +105,6 @@ export const GeneralInfo = () => {
       status: undefined,
     },
   });
-
-  const { data } = useQuery({
-    queryKey: ["pets", "general", id],
-    queryFn: () => get(api.pets.general.$get({ query: { id: String(id) } })),
-  });
-
-  useEffect(() => {
-    if (data) {
-      petsForm.reset({
-        ...(data as z.infer<typeof petGeneralInfoSchema>),
-      });
-    }
-  }, [data, petsForm]);
 
   const { mutate, isPending } = useMutation({
     mutationFn: async function sendData(
@@ -155,7 +142,11 @@ export const GeneralInfo = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t("status")}</FormLabel>
-              <Select onValueChange={field.onChange} value={field.value || ""}>
+              <Select
+                key={field.value}
+                onValueChange={field.onChange}
+                value={field.value}
+              >
                 <FormControl>
                   <SelectTrigger className="w-full">
                     <SelectValue />
@@ -173,7 +164,11 @@ export const GeneralInfo = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t("sex")}</FormLabel>
-              <Select onValueChange={field.onChange} value={field.value || ""}>
+              <Select
+                key={field.value}
+                onValueChange={field.onChange}
+                value={field.value}
+              >
                 <FormControl>
                   <SelectTrigger className="w-full">
                     <SelectValue />
@@ -191,7 +186,11 @@ export const GeneralInfo = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t("species")}</FormLabel>
-              <Select onValueChange={field.onChange} value={field.value || ""}>
+              <Select
+                key={field.value}
+                onValueChange={field.onChange}
+                value={field.value}
+              >
                 <FormControl>
                   <SelectTrigger className="w-full">
                     <SelectValue />
@@ -235,7 +234,11 @@ export const GeneralInfo = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t("size")}</FormLabel>
-              <Select onValueChange={field.onChange} value={field.value || ""}>
+              <Select
+                key={field.value}
+                onValueChange={field.onChange}
+                value={field.value}
+              >
                 <FormControl>
                   <SelectTrigger className="w-full">
                     <SelectValue />
@@ -268,18 +271,16 @@ export const GeneralInfo = () => {
               <FormItem className="w-24">
                 <FormLabel>{t("measurement")}</FormLabel>
                 <Select
+                  key={field.value}
                   onValueChange={field.onChange}
-                  value={field.value || ""}
+                  value={field.value}
                 >
                   <FormControl>
                     <SelectTrigger className="w-full">
                       <SelectValue />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
-                    <SelectItem value="Kgs">Kgs</SelectItem>
-                    <SelectItem value="Lbs">Lbs</SelectItem>
-                  </SelectContent>
+                  <MeasurementOptions />
                 </Select>
                 <FormMessage />
               </FormItem>

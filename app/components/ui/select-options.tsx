@@ -132,3 +132,12 @@ export const SizeOptions = () => {
     </SelectContent>
   );
 };
+
+export const MeasurementOptions = () => {
+  return (
+    <SelectContent>
+      <SelectItem value="Kgs">Kgs</SelectItem>
+      <SelectItem value="Lbs">Lbs</SelectItem>
+    </SelectContent>
+  );
+};
