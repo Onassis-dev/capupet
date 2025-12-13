@@ -100,7 +100,7 @@ export const CrudTable = ({
   });
 
   return (
-    <div className="relative sm:w-full overflow-hidden -ml-4 sm:ml-0 w-screen sm:rounded-2xl border">
+    <div className="relative sm:w-full overflow-hidden -ml-4 sm:ml-0 w-screen">
       <Table>
         <TableHeader className="h-12">
           <TableRow>

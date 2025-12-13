@@ -1,7 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { CircleCheckBig, Home, PawPrint, Users } from "lucide-react";
+import {
+  AppWindowMacIcon,
+  CircleCheckBig,
+  Home,
+  PawPrint,
+  Users,
+} from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -58,6 +64,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <Link href="/dashboard/tasks">
                   <CircleCheckBig className="size-5!" strokeWidth={1.8} />
                   <span>Tasks</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          )}
+          {session?.user?.website && (
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                asChild
+                isActive={isActive(location, "website")}
+              >
+                <Link href="/dashboard/website">
+                  <AppWindowMacIcon className="size-5!" strokeWidth={1.8} />
+                  <span>Website</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

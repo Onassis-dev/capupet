@@ -6,13 +6,14 @@ import { api, get } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
 import PaginationMenu from "@/components/PaginationMenu";
 import { OptionsGrid } from "@/components/ui/grids";
-import { SearchInput } from "@/components/ui/search-input";
+import { SearchInput } from "@/components/ui/custom-inputs";
 import { CrudTable } from "@/components/CrudTable";
 import { useSelectedRow } from "@/hooks/use-selected-row";
 import { useState } from "react";
 import DeleteDialog from "@/components/DeleteDialog";
 import { useI18n } from "@/hooks/use-i18n";
 import { AdoptersForm } from "./AdoptersForm";
+import { PageWrapper } from "@/components/PageWrapper";
 
 export default function Page() {
   const t = useI18n({
@@ -36,6 +37,10 @@ export default function Page() {
       es: "Adoptante eliminado correctamente",
       en: "Adopter deleted successfully",
     },
+    title: {
+      es: "Adoptantes",
+      en: "Adopters",
+    },
   });
 
   const { page, setPage } = usePagination();
@@ -54,7 +59,7 @@ export default function Page() {
       ),
   });
   return (
-    <>
+    <PageWrapper title={t("title")} size="md">
       <OptionsGrid>
         <SearchInput
           value={filter}
@@ -103,6 +108,6 @@ export default function Page() {
         }
         successMessage={t("deleteSuccessMessage")}
       />
-    </>
+    </PageWrapper>
   );
 }

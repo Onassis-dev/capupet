@@ -36,4 +36,11 @@ export const petGeneralInfoSchema = z.object({
 
 export const publicPetSchema = z.object({
   id: z.number(),
+  publicDescription: z.string().nullish(),
+  public: z.boolean(),
+});
+
+export const uploadPetImageSchema = z.object({
+  id: z.coerce.number(),
+  file: z.instanceof(File),
 });

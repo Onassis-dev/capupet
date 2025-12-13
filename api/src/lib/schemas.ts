@@ -2,7 +2,7 @@ import { z } from "zod/v4";
 
 export const idSchema = z.coerce.number();
 
-export const emailSchema = z.string().length(0).or(z.email());
+export const emailSchema = z.email().or(z.string().length(0));
 
 export const dateSchema = z
   .string()

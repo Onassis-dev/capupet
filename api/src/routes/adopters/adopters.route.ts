@@ -28,7 +28,9 @@ export const adoptersRoute = new Hono<{ Variables: Variables }>()
       .where(
         and(
           eq(adopters.organizationId, c.get("orgId")),
-          data.text ? ilike(adopters.fts, `%${data.text}%`) : undefined
+          data.text
+            ? ilike(adopters.fts, `%${data.text.toLowerCase()}%`)
+            : undefined
         )
       )
       .limit(10)

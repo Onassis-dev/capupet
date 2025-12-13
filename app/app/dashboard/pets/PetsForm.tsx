@@ -16,12 +16,7 @@ import { api, get } from "@/lib/api";
 import { useI18n } from "@/hooks/use-i18n";
 import { ModalForm } from "@/components/ModalForm";
 import { createPetSchema } from "@server/routes/pets/pets.schema";
-import {
-  Select,
-  SelectContent,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
 import {
   SexOptions,
@@ -29,11 +24,11 @@ import {
   StatusOptions,
 } from "@/components/ui/select-options";
 
-const defaultValues: z.infer<typeof createPetSchema> = {
+const defaultValues = {
   name: "",
-  species: "dog",
-  sex: "male",
-  status: "intake",
+  species: undefined,
+  sex: undefined,
+  status: undefined,
 };
 
 export const PetsForm = () => {

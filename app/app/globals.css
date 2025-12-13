@@ -4,11 +4,25 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --color-azure-radiance-50: hsl(206, 94%, 97%);
+  --color-azure-radiance-100: hsl(208, 94%, 93%);
+  --color-azure-radiance-200: hsl(208, 94%, 87%);
+  --color-azure-radiance-300: hsl(206, 94%, 78%);
+  --color-azure-radiance-400: hsl(207, 92%, 68%);
+  --color-azure-radiance-500: hsl(211, 88%, 60%);
+  --color-azure-radiance-600: hsl(215, 90%, 55%);
+  --color-azure-radiance-700: hsl(219, 73%, 48%);
+  --color-azure-radiance-800: hsl(220, 68%, 40%);
+  --color-azure-radiance-900: hsl(219, 61%, 33%);
+  --color-azure-radiance-950: hsl(221, 53%, 21%);
+}
+
+:root {
   --background: hsl(0 0% 99.5%);
   --foreground: hsl(0 0% 25%);
   --card: hsl(0 0% 99%);
   --card-foreground: hsl(0 0% 12%);
-  --primary: var(--color-blue-600);
+  --primary: var(--color-azure-radiance-600);
   --primary-foreground: hsl(0 0% 100%);
   --secondary: var(--color-gray-100);
   --secondary-foreground: var(--color-gray-500);
@@ -17,9 +31,9 @@
   --accent: hsl(0 0% 91%);
   --accent-foreground: hsl(0 0% 12%);
   --destructive: var(--color-red-500);
-  --border: hsl(0 0% 89%);
-  --input: hsl(0 0% 89%);
-  --ring: var(--color-blue-300);
+  --border: hsl(0 0% 91%);
+  --input: hsl(0 0% 91%);
+  --ring: var(--color-azure-radiance-300);
   --chart-1: hsl(17 22% 32%);
   --chart-2: hsl(35 100% 85%);
   --chart-3: hsl(0 0% 91%);
@@ -27,8 +41,8 @@
   --chart-5: hsl(17 22% 32%);
   --sidebar: #f6f6f6;
   --sidebar-foreground: #505050;
-  --sidebar-primary: var(--color-blue-100);
-  --sidebar-primary-foreground: var(--color-blue-700);
+  --sidebar-primary: var(--color-azure-radiance-100);
+  --sidebar-primary-foreground: var(--color-azure-radiance-700);
   --sidebar-accent: #eeeeee;
 
   --radius: 0.5rem;

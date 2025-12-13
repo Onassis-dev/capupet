@@ -6,7 +6,7 @@ import { api, get } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
 import PaginationMenu from "@/components/PaginationMenu";
 import { OptionsGrid } from "@/components/ui/grids";
-import { SearchInput } from "@/components/ui/search-input";
+import { SearchInput } from "@/components/ui/custom-inputs";
 import { CrudTable } from "@/components/CrudTable";
 import { useSelectedRow } from "@/hooks/use-selected-row";
 import { useState } from "react";
@@ -22,8 +22,8 @@ import {
   MarsIcon,
   VenusIcon,
   CircleQuestionMarkIcon,
-  CircleCheckIcon,
 } from "lucide-react";
+import { PageWrapper } from "@/components/PageWrapper";
 
 export default function Page() {
   const t = useI18n({
@@ -79,6 +79,10 @@ export default function Page() {
       es: "Mascota eliminada correctamente",
       en: "Pet deleted successfully",
     },
+    title: {
+      es: "Mascotas",
+      en: "Pets",
+    },
   });
 
   const { page, setPage } = usePagination();
@@ -88,7 +92,7 @@ export default function Page() {
   const router = useRouter();
 
   const { data, status } = useQuery({
-    queryKey: ["pets", debouncedFilter, page],
+    queryKey: ["pets", "table", debouncedFilter, page],
     queryFn: () =>
       get(
         api.pets.$get({
@@ -98,7 +102,7 @@ export default function Page() {
   });
 
   return (
-    <>
+    <PageWrapper title={t("title")} size="lg">
       <OptionsGrid>
         <SearchInput
           value={filter}
@@ -202,6 +206,6 @@ export default function Page() {
         }
         successMessage={t("deleteSuccessMessage")}
       />
-    </>
+    </PageWrapper>
   );
 }

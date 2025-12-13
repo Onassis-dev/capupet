@@ -21,7 +21,7 @@ export const SearchInput = ({
       <Input
         placeholder={t("search")}
         type={"search"}
-        className={cn("pl-9 h-9 w-full rounded-xl !text-base", className)}
+        className={cn("pl-9 h-9 w-full rounded-xl", className)}
         value={value}
         onChange={(e) => onChange?.(e)}
       />
@@ -30,3 +30,28 @@ export const SearchInput = ({
 };
 
 SearchInput.displayName = "SearchInput";
+
+const regexs = {
+  integer: /^\d+$/,
+  twoDecimals: /^\d+(\.\d{1,2})?$/,
+  float: /^\d+(\.\d+)?$/,
+};
+
+export const NumberInput = ({
+  onChange,
+  ...props
+}: React.ComponentProps<"input">) => {
+  return (
+    <Input
+      {...props}
+      pattern="^\d+$"
+      onChange={(e) => {
+        if (e.target.value.match(/^\d+$/) || e.target.value === "") {
+          onChange?.(e);
+        } else {
+          e.preventDefault();
+        }
+      }}
+    />
+  );
+};

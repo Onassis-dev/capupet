@@ -6,6 +6,7 @@ import { organizationsRoute } from "./routes/organizations/organizations.route";
 import { petsRoute } from "./routes/pets/pets.route";
 import { adoptersRoute } from "./routes/adopters/adopters.route";
 import { tasksRoute } from "./routes/tasks/tasks.route";
+import { imagesRoute } from "./routes/images/images.route";
 
 export type Variables = {
   userId: string;
@@ -31,6 +32,7 @@ const app = new Hono<{ Variables: Variables }>()
   .on(["POST", "GET"], "/api/auth/**", (c) => auth.handler(c.req.raw))
 
   .route("/pets", petsRoute)
+  .route("/images", imagesRoute)
   .route("/adopters", adoptersRoute)
   .route("/tasks", tasksRoute)
   .route("/users", usersRoute)

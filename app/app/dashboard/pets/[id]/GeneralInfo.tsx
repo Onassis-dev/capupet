@@ -1,6 +1,5 @@
-import { useParams } from "next/navigation";
 import { api, get } from "@/lib/api";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   Form,
   FormField,
@@ -27,8 +26,11 @@ import {
   StatusOptions,
 } from "@/components/ui/select-options";
 import { SizeOptions } from "@/components/ui/select-options";
+import { PetGeneralInfo } from "./queries";
+import { useEffect, useRef } from "react";
+import { NumberInput } from "@/components/ui/custom-inputs";
 
-export const GeneralInfo = () => {
+export const GeneralInfo = ({ data }: { data: PetGeneralInfo }) => {
   const { language } = useLanguage();
   const t = useI18n({
     name: {
@@ -80,17 +82,11 @@ export const GeneralInfo = () => {
       en: "Save changes",
     },
   });
-  const { id } = useParams();
   const client = useQueryClient();
-
-  const { data } = useQuery({
-    queryKey: ["pets", "general", id],
-    queryFn: () => get(api.pets.general.$get({ query: { id: String(id) } })),
-  });
+  const initiated = useRef(false);
 
   const petsForm = useForm<z.infer<typeof petGeneralInfoSchema>>({
     resolver: zodResolver(petGeneralInfoSchema),
-    values: data as z.infer<typeof petGeneralInfoSchema> | undefined,
     defaultValues: {
       id: 0,
       name: "",
@@ -105,6 +101,13 @@ export const GeneralInfo = () => {
       status: undefined,
     },
   });
+
+  useEffect(() => {
+    if (!initiated.current && data) {
+      petsForm.reset(data);
+      initiated.current = true;
+    }
+  }, [data, petsForm]);
 
   const { mutate, isPending } = useMutation({
     mutationFn: async function sendData(
@@ -237,7 +240,7 @@ export const GeneralInfo = () => {
               <Select
                 key={field.value}
                 onValueChange={field.onChange}
-                value={field.value}
+                value={field.value || undefined}
               >
                 <FormControl>
                   <SelectTrigger className="w-full">
@@ -258,7 +261,11 @@ export const GeneralInfo = () => {
               <FormItem className="flex-1">
                 <FormLabel>{t("weight")}</FormLabel>
                 <FormControl>
-                  <Input value={field.value || ""} onChange={field.onChange} />
+                  <Input
+                    type="number"
+                    value={field.value || ""}
+                    onChange={field.onChange}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -273,7 +280,7 @@ export const GeneralInfo = () => {
                 <Select
                   key={field.value}
                   onValueChange={field.onChange}
-                  value={field.value}
+                  value={field.value || undefined}
                 >
                   <FormControl>
                     <SelectTrigger className="w-full">

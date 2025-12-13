@@ -27,17 +27,7 @@ export default function RootLayout({
             <Toaster />
             <DashboardWrapper>
               <AppSidebar />
-              <SidebarInset>
-                <header className="flex shrink-0 items-center gap-2 pb-8">
-                  {/* <SidebarTrigger /> */}
-                  {/* <Separator
-                    orientation="vertical"
-                    className="data-[orientation=vertical]:h-4"
-                  /> */}
-                  <h1 className="font-bold text-4xl">Adopters</h1>
-                </header>
-                <div className="">{children}</div>
-              </SidebarInset>
+              <SidebarInset>{children}</SidebarInset>
             </DashboardWrapper>
           </QueryClientProvider>
         </SidebarProvider>

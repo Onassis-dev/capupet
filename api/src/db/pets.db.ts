@@ -5,8 +5,10 @@ import {
   serial,
   pgEnum,
   date,
+  boolean,
 } from "drizzle-orm/pg-core";
 import { organizationId } from "./auth.db";
+import { sql, SQL } from "drizzle-orm";
 
 export const speciesArray = ["dog", "cat", "other"] as const;
 export const sexesArray = ["male", "female", "unknown"] as const;
@@ -38,5 +40,8 @@ export const pets = pgTable("pets", {
   publicDescription: varchar(),
   admissionDate: date(),
   bornDate: date(),
+  public: boolean().notNull().default(false),
+  image: varchar(),
+  fts: varchar().generatedAlwaysAs((): SQL => sql`concat_fts(${pets.name})`),
   organizationId,
 });

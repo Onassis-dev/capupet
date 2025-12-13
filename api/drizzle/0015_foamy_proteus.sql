@@ -1,0 +1,1 @@
+ALTER TABLE "pets" ADD COLUMN "fts" varchar GENERATED ALWAYS AS (concat_fts("pets"."name")) STORED;
