@@ -28,7 +28,7 @@ export function Header({ signInText, startText }: HeaderProps) {
         isScrolled ? "border-b" : "border-b border-transparent"
       }`}
     >
-      <div className="flex justify-between gap-4 w-full max-w-5xl mx-auto">
+      <div className="flex justify-between gap-4 w-full max-w-5xl mx-auto px-4">
         <div>
           <p className="text-2xl font-bold">Capupet</p>
         </div>
