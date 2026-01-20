@@ -21,7 +21,7 @@ export const organizationsRoute = new Hono<{ Variables: Variables }>()
       users: true,
       pets: true,
       adopters: true,
-      calendar: true,
+      tasks: true,
       website: true,
       inventory: true,
       finances: true,

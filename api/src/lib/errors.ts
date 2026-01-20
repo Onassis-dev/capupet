@@ -18,6 +18,10 @@ const errorList = {
     es: "No tienes una organización disponible",
     en: "You don't have an available organization",
   },
+  confirmEmail: {
+    es: "Por favor, confirma tu email para continuar",
+    en: "Please confirm your email to continue",
+  },
 } as const;
 
 export function sendError(

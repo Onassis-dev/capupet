@@ -83,7 +83,7 @@ export default function Page() {
 
   const { mutate: selectOrg, isPending: isSelectingPending } = useMutation({
     mutationFn: async (orgId: number) => {
-      await get(api.users.organizations.$put({ json: { orgId } }));
+      await get(api.users.org.$put({ json: { orgId } }));
       client.resetQueries();
       router.push("/dashboard");
     },
