@@ -158,8 +158,12 @@ export function Landing({ locale }: { locale: "es" | "en" }) {
       en: "Is Capupet really free?",
     },
     faq1Answer: {
-      es: "Si, capupet es 100% gratis, nuestra mision es ayudar refugios a encontrar hogares para sus animales.",
-      en: "Yes, Capupet is 100% free, our mission is to help shelters find homes for their animals.",
+      es: "Sí. Capupet es 100% gratis para refugios. No tiene costos ni planes ocultos. Es un proyecto respaldado y mantenido por",
+      en: "Yes. Capupet is 100% free for shelters. There are no costs or hidden plans. It is a project backed and maintained by",
+    },
+    faq1AnwerPart2: {
+      es: "con la misión de facilitar la adopción de animales.",
+      en: "with the mission of making animal adoption easier.",
     },
     faq2Question: {
       es: "¿Cuántos animales puedo registrar?",
@@ -268,7 +272,18 @@ export function Landing({ locale }: { locale: "es" | "en" }) {
   ];
 
   const faqs = [
-    { question: t("faq1Question"), answer: t("faq1Answer") },
+    {
+      question: t("faq1Question"),
+      answer: (
+        <>
+          {t("faq1Answer")}{" "}
+          <a href="https://onassis.dev" className="text-primary underline">
+            onassis.dev
+          </a>{" "}
+          {t("faq1AnwerPart2")}
+        </>
+      ),
+    },
     { question: t("faq2Question"), answer: t("faq2Answer") },
     { question: t("faq3Question"), answer: t("faq3Answer") },
     { question: t("faq4Question"), answer: t("faq4Answer") },

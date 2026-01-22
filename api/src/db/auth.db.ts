@@ -8,7 +8,7 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 import { uniqueIndex } from "drizzle-orm/pg-core";
-import { AnyPgColumn } from "drizzle-orm/pg-core";
+import { type AnyPgColumn } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
   id: text("id").primaryKey(),

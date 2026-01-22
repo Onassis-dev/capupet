@@ -15,7 +15,6 @@ import { pets } from "../../db/pets.db";
 import { deleteSchema } from "../../lib/schemas";
 import { handleImage } from "../../lib/files";
 import { s3 } from "../../lib/s3";
-import { images } from "../../db/images.db";
 
 export const petsRoute = new Hono<{ Variables: Variables }>()
   .use(checkPermission("pets"))

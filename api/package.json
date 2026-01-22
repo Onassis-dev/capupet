@@ -8,7 +8,6 @@
     "start": "drizzle-kit migrate && bun ./dist/src/index.js"
   },
   "dependencies": {
-    "@hono/zod-validator": "^0.7.4",
     "drizzle-orm": "^0.44.7",
     "drizzle-zod": "^0.8.3",
     "multer": "^2.0.2",

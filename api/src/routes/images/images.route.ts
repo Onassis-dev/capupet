@@ -4,7 +4,6 @@ import { checkPermission } from "../../middleware/auth.middleware";
 import { db } from "../../lib/db";
 import { and, eq } from "drizzle-orm";
 import { type Variables } from "../..";
-import { deleteSchema } from "../../lib/schemas";
 import { handleImage } from "../../lib/files";
 import { s3 } from "../../lib/s3";
 import { images } from "../../db/images.db";

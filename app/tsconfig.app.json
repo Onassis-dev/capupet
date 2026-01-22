@@ -20,9 +20,17 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "forceConsistentCasingInFileNames": true,
+    "erasableSyntaxOnly": true,
+    "noUncheckedSideEffectImports": true,
+
+    /* Path aliases */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@server/*": ["../api/src/*"]
+    }
   },
   "include": ["src"]
 }

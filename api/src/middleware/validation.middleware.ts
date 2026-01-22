@@ -1,8 +1,8 @@
-import { zValidator } from "@hono/zod-validator";
-import { z } from "zod/v4";
+import { validator as honoValidator } from "hono/validator";
 import { type ValidationTargets } from "hono";
+import { type z } from "zod";
 
-function normalize(value: any): any {
+function normalize(value: unknown): unknown {
   if (value === "") return null;
   if (Array.isArray(value)) return value.map(normalize);
   if (typeof value === "object" && value !== null) {
@@ -16,13 +16,15 @@ function normalize(value: any): any {
 
 export const validator = <
   Target extends keyof ValidationTargets,
-  Schema extends z.ZodTypeAny
+  Schema extends z.ZodType,
 >(
   target: Target,
   schema: Schema
 ) =>
-  zValidator(target, schema, undefined, {
-    validationFunction: async (schema, value) => {
-      return (await schema.safeParseAsync(normalize(value))) as any;
-    },
+  honoValidator(target, async (value, c) => {
+    const result = await schema.safeParseAsync(normalize(value));
+    if (!result.success) {
+      return c.json({ error: result.error.flatten() }, 400);
+    }
+    return result.data as z.infer<Schema>;
   });
