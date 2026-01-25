@@ -44,6 +44,22 @@ export default function PetDetailPage() {
       es: "Archivos",
       en: "Files",
     },
+    available: {
+      es: "Disponible",
+      en: "Available",
+    },
+    adopted: {
+      es: "Adoptado",
+      en: "Adopted",
+    },
+    deceased: {
+      es: "Fallecido",
+      en: "Deceased",
+    },
+    intake: {
+      es: "En proceso",
+      en: "Intake",
+    },
   });
 
   const [isUploading, setIsUploading] = useState(false);
@@ -120,7 +136,7 @@ export default function PetDetailPage() {
           </button>
           <div>
             <h1 className="text-3xl font-bold mb-2">{data?.name}</h1>
-            <Badge variant="secondary">{data?.status}</Badge>
+            <Badge variant="secondary">{t(data?.status as any)}</Badge>
           </div>
         </div>
         <TabsList className="mb-6 w-[calc(100%+2rem)] -mx-4 sm:mx-0 sm:w-full text-sm sm:text-base">

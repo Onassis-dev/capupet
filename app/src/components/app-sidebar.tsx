@@ -17,8 +17,32 @@ import { SelectOrganization } from "./SelectOrg";
 import { session } from "@/hooks/use-session";
 import { Link } from "react-router";
 import { useLocation } from "react-router";
+import { useI18n } from "@/hooks/use-i18n";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const t = useI18n({
+    home: {
+      es: "Inicio",
+      en: "Home",
+    },
+    pets: {
+      es: "Mascotas",
+      en: "Pets",
+    },
+    adopters: {
+      es: "Adoptantes",
+      en: "Adopters",
+    },
+    tasks: {
+      es: "Tareas",
+      en: "Tasks",
+    },
+    website: {
+      es: "Sitio web",
+      en: "Website",
+    },
+  });
+
   const location = useLocation().pathname;
 
   return (
@@ -30,7 +54,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton asChild isActive={isActive(location, undefined)}>
               <Link to="/dashboard">
                 <Home className="size-5!" strokeWidth={1.8} />
-                <span>Home</span>
+                <span>{t("home")}</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -39,7 +63,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <SidebarMenuButton asChild isActive={isActive(location, "pets")}>
                 <Link to="/dashboard/pets">
                   <PawPrint className="size-5!" strokeWidth={1.8} />
-                  <span>Pets</span>
+                  <span>{t("pets")}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -52,7 +76,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               >
                 <Link to="/dashboard/adopters">
                   <Users className="size-5!" strokeWidth={1.8} />
-                  <span>Adopters</span>
+                  <span>{t("adopters")}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -62,7 +86,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <SidebarMenuButton asChild isActive={isActive(location, "tasks")}>
                 <Link to="/dashboard/tasks">
                   <CircleCheckBig className="size-5!" strokeWidth={1.8} />
-                  <span>Tasks</span>
+                  <span>{t("tasks")}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -75,7 +99,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               >
                 <Link to="/dashboard/website">
                   <AppWindowMacIcon className="size-5!" strokeWidth={1.8} />
-                  <span>Website</span>
+                  <span>{t("website")}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
