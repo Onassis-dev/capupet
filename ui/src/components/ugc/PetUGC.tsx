@@ -1,9 +1,15 @@
-import { listedInformationStyle, iconColor } from "./styles";
+import {
+  listedInformationStyle,
+  iconColor,
+  buttonStyle,
+  buttonColor,
+} from "./styles";
 import { ugcI18n } from "./ugc-i18n";
 import { Website } from "./types";
-import { Calendar, Mars, Ruler, Scale } from "lucide-react";
+import { Calendar, MailIcon, Mars, Ruler, Scale } from "lucide-react";
 import { HeaderUGC } from "./HeaderUGC";
 import { FooterUGC } from "./FooterUGC";
+import { WhatsAppIcon } from "../icons";
 
 interface Props {
   website: Website;
@@ -133,6 +139,24 @@ export const PetUGC = ({ website, pet, slug }: Props) => {
               ))}
             </div>
           </section>
+        )}
+
+        {website.contactOption === "whatsapp" && (
+          <a
+            href={`https://wa.me/${website.countryCode}${website.phone}?text=${encodeURIComponent(t("getInfo") + " " + pet.name)}`}
+            className={`${buttonStyle(website.style)} ${buttonColor(website.color)} w-full flex items-center gap-2 justify-center mt-10 sticky bottom-10 py-2`}
+          >
+            <WhatsAppIcon className="size-4" /> {t("askAbout")} {pet.name}
+          </a>
+        )}
+
+        {website.contactOption === "email" && (
+          <a
+            href={`mailto:${website.email}?subject=${encodeURIComponent(t("getInfo") + " " + pet.name)}`}
+            className={`${buttonStyle(website.style)} ${buttonColor(website.color)} w-full flex items-center gap-2 justify-center mt-10 sticky bottom-10 py-2`}
+          >
+            <MailIcon className="size-4" /> {t("askAbout")} {pet.name}
+          </a>
         )}
       </main>
 

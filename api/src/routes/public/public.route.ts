@@ -90,6 +90,14 @@ export const publicRoute = new Hono()
         image: organizations.logo,
         color: websites.color,
         style: websites.style,
+        contactOption: websites.contactOption,
+        countryCode: websites.countryCode,
+        phone: websites.phone,
+        email: websites.email,
+        website: websites.website,
+        instagram: websites.instagram,
+        facebook: websites.facebook,
+        youtube: websites.youtube,
         pet: sql<
           typeof pets.$inferSelect & { images: string[] }
         >`(select json_build_object(

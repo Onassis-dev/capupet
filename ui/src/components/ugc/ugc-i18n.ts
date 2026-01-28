@@ -105,6 +105,14 @@ const texts = {
     es: "Volver",
     en: "Back",
   },
+  askAbout: {
+    es: "Preguntar sobre",
+    en: "Ask about",
+  },
+  getInfo: {
+    es: "Me gustaria saber mas sobre",
+    en: "I would like to know more about",
+  },
 } as const satisfies Record<string, Record<Lang, string>>;
 
 export const ugcI18n = (language: Lang) => {
