@@ -20,6 +20,7 @@ import { Button } from "@workspace/ui/components/ui/button";
 import { cn } from "@workspace/ui/lib/utils";
 import { useI18n } from "@/hooks/use-i18n";
 import { Logout } from "./Logout";
+import { Settings } from "./Settings";
 
 export function SelectOrganization() {
   const t = useI18n({
@@ -43,9 +44,10 @@ export function SelectOrganization() {
   const client = useQueryClient();
   const [openOrganization, setOpenOrganization] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openSettings, setOpenSettings] = useState(false);
   const [openLogout, setOpenLogout] = useState(false);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const { mutate } = useMutation({
     mutationFn: async (orgId: number) => {
       await get(api.users.org.$put({ json: { orgId } }));
@@ -59,7 +61,7 @@ export function SelectOrganization() {
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger className="grid grid-cols-[1.5rem_1fr_1rem] gap-2 p-2 rounded-lg items-center cursor-pointer mb-4">
           <Avatar className="rounded-lg size-6">
-            <AvatarImage />
+            <AvatarImage src={session?.user?.orgLogo || ""} />
 
             <AvatarFallback>{session?.user?.orgName?.[0]}</AvatarFallback>
           </Avatar>
@@ -91,7 +93,7 @@ export function SelectOrganization() {
                   variant="secondary"
                   className="text-xs h-auto px-1.5 py-1"
                   onClick={() => {
-                    navigate("/settings/organization");
+                    setOpenSettings(true);
                     setOpen(false);
                   }}
                 >
@@ -103,7 +105,7 @@ export function SelectOrganization() {
                   variant="secondary"
                   className="text-xs h-auto px-1.5 py-1"
                   onClick={() => {
-                    navigate("/settings/users");
+                    setOpenSettings(true);
                     setOpen(false);
                   }}
                 >
@@ -125,6 +127,7 @@ export function SelectOrganization() {
                 className="w-full font-medium text-sm h-auto p-1 grid grid-cols-[1.5rem_1fr_1rem] gap-2 text-left"
               >
                 <Avatar className="rounded-lg size-6">
+                  <AvatarImage src={org.logo || ""} />
                   <AvatarFallback className="rounded-lg bg-primary/10 text-foreground">
                     {org.name[0]}
                   </AvatarFallback>
@@ -163,6 +166,7 @@ export function SelectOrganization() {
         setOpen={setOpenOrganization}
       />
       <Logout open={openLogout} setOpen={setOpenLogout} />
+      <Settings open={openSettings} setOpen={setOpenSettings} />
     </>
   );
 }

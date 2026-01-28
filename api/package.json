@@ -3,7 +3,6 @@
   "private": true,
   "scripts": {
     "dev": " TZ=utc bun run --hot src/index.ts",
-    "stripe": "stripe listen --forward-to localhost:3000/webhooks/stripe",
     "build": "tsc",
     "start": "drizzle-kit migrate && bun ./dist/src/index.js"
   },
@@ -13,8 +12,7 @@
     "multer": "^2.0.2",
     "pg": "^8.16.3",
     "resend": "^6.2.0",
-    "sharp": "^0.34.4",
-    "stripe": "^18.5.0"
+    "sharp": "^0.34.4"
   },
   "devDependencies": {
     "@types/bun": "^1.3.0",

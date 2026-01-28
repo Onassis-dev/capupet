@@ -214,7 +214,7 @@ export const ColorOptions = () => {
         {t("blue")}
       </SelectItem>
       <SelectItem value="green">
-        <div className="bg-green-400 size-3 rounded-full" />
+        <div className="bg-emerald-400 size-3 rounded-full" />
         {t("green")}
       </SelectItem>
       <SelectItem value="yellow">

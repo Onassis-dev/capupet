@@ -99,7 +99,7 @@ export function buttonColor(color: string) {
   return {
     black: "bg-neutral-700! text-white!",
     red: "bg-red-500! text-white!",
-    green: "bg-green-500! text-white!",
+    green: "bg-emerald-500! text-white!",
     blue: "bg-blue-500! text-white!",
     yellow: "bg-yellow-500! text-white!",
     purple: "bg-purple-500! text-white!",
@@ -112,7 +112,7 @@ export function iconColor(color: string) {
   return {
     black: "text-neutral-700! size-5",
     red: "text-red-500! size-5",
-    green: "text-green-500! size-5",
+    green: "text-emerald-500! size-5",
     blue: "text-blue-500! size-5",
     yellow: "text-yellow-500! size-5",
     purple: "text-purple-500! size-5",

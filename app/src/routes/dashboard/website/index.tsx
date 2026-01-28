@@ -166,7 +166,25 @@ export default function WebsitePage() {
             <FormControl>
               <Input value={`${data?.slug || ""}.capu.pet`} readOnly />
             </FormControl>
-            <div className="grid grid-cols-3 gap-2 pt-2 pb-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-2 pb-6">
+              <Button
+                className="col-span-full sm:col-span-1"
+                variant="secondary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (import.meta.env.VITE_DEV) {
+                    window.open(
+                      "http://localhost:4321/ugc/" + data?.slug,
+                      "_blank"
+                    );
+                  } else {
+                    window.open(data?.slug + ".capu.pet", "_blank");
+                  }
+                }}
+              >
+                <SquareArrowOutUpRightIcon className="size-4" />
+                {t("visit")}
+              </Button>
               <Button
                 variant="secondary"
                 onClick={(e) => {
@@ -176,19 +194,6 @@ export default function WebsitePage() {
               >
                 <PencilIcon className="size-4" />
                 {t("edit")}
-              </Button>
-              <Button
-                variant="secondary"
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.open(
-                    window.location.origin + "/" + data?.slug,
-                    "_blank"
-                  );
-                }}
-              >
-                <SquareArrowOutUpRightIcon className="size-4" />
-                {t("visit")}
               </Button>
               <Button variant="secondary">
                 <ShareIcon className="size-4" />

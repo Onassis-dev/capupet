@@ -6,10 +6,11 @@ import { type Permission, permissions } from "../../db/auth.db";
 import { eq } from "drizzle-orm";
 import { type Variables } from "../../index";
 import { validator } from "../../middleware/validation.middleware";
-import Stripe from "stripe";
 import { sendError } from "../../lib/errors";
-import { createOrgSchema } from "./organizations.schema";
+import { createOrgSchema, updateOrgSchema } from "./organizations.schema";
 import { users } from "../../db/auth.db";
+import { handleImage } from "../../lib/files";
+import { s3 } from "../../lib/s3";
 
 export const organizationsRoute = new Hono<{ Variables: Variables }>()
   .use(checkPermission())
@@ -60,31 +61,32 @@ export const organizationsRoute = new Hono<{ Variables: Variables }>()
     return c.json({});
   })
 
-  .put("/", validator("json", createOrgSchema), async (c) => {
-    const data = c.req.valid("json");
-    const stripe = new Stripe(process.env.STRIPE_API_KEY!);
+  .put("/", validator("form", updateOrgSchema), async (c) => {
+    const data = c.req.valid("form");
 
-    try {
-      await db.transaction(async (tx) => {
-        const [organization] = await tx
-          .update(organizations)
-          .set({
-            name: data.name,
-          })
-          .where(eq(organizations.id, c.get("orgId")))
-          .returning({ subscriptionId: organizations.subscriptionId });
+    const file = await handleImage({
+      imgSize: 400,
+      quality: 85,
+      transparent: false,
+      file: data.file,
+    });
 
-        if (!organization?.subscriptionId) return;
+    let url;
+    if (file) {
+      url = `orgs/${c.get("orgId")}.${file.mimetype.split("/")[1]}`;
 
-        await stripe.subscriptions.update(organization.subscriptionId, {
-          description: data.name,
-        });
+      await s3.write(url, file.buffer, {
+        type: file.mimetype,
       });
-    } catch (error: any) {
-      if (error.cause.constraint === "organizations_name_unique")
-        return sendError(c, "nameTaken");
-      throw error;
     }
+
+    await db
+      .update(organizations)
+      .set({
+        name: data.name,
+        logo: url || undefined,
+      })
+      .where(eq(organizations.id, c.get("orgId")));
 
     return c.json({});
   });

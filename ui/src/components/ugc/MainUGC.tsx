@@ -92,7 +92,7 @@ export const MainUGC = ({ website, apiOrigin, slug }: Props) => {
             <img
               src={website.image}
               alt={website.title}
-              className="w-24 h-24 mx-auto mb-4 rounded-full object-cover shadow-lg"
+              className="size-24 mb-4 rounded-full object-cover"
             />
           )}
           <h1 className={titleStyle(website.style)}>{website.title}</h1>

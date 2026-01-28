@@ -103,7 +103,7 @@ export const FooterUGC = ({ website, slug }: Props) => {
 
           {/* Attribution */}
           <div className="pt-4 mt-2 w-full">
-            <p className="text-xs text-muted-foreground text-center">
+            <p className="text-sm text-muted-foreground text-center">
               {t("websiteBy")}{" "}
               <a
                 href="https://capupet.com"

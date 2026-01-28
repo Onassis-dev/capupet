@@ -26,7 +26,6 @@ export const users = pgTable("users", {
     .notNull(),
   lang: text("lang"),
   theme: text("theme").default("light"),
-  stripeCustomerId: text("stripeCustomerId"),
   permissionId: integer().references(() => permissions.id, {
     onDelete: "set null",
   }),
@@ -83,7 +82,6 @@ export const organizations = pgTable("organizations", {
   id: serial().primaryKey().notNull(),
   name: varchar().notNull().unique(),
   logo: varchar(),
-  subscriptionId: text(),
   plan: smallint().default(0).notNull(),
   ownerId: text()
     .notNull()

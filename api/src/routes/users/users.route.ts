@@ -9,6 +9,7 @@ import { organizations } from "../../db/auth.db";
 import { updateOrgSchema } from "./user.schema";
 import { validator } from "../../middleware/validation.middleware";
 import { sendError } from "../../lib/errors";
+import { s3 } from "../../lib/s3";
 
 export const usersRoute = new Hono<{ Variables: Variables }>()
   .use(checkPermission())
@@ -43,6 +44,11 @@ export const usersRoute = new Hono<{ Variables: Variables }>()
       .innerJoin(permissions, eq(organizations.id, permissions.organizationId))
       .where(eq(permissions.userId, userId))
       .orderBy(organizations.name);
+
+    if (user.orgLogo) user.orgLogo = s3.presign(user.orgLogo);
+    availableOrgs.forEach((org) => {
+      if (org.logo) org.logo = s3.presign(org.logo);
+    });
 
     return c.json({
       user,
