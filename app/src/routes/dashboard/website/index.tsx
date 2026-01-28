@@ -216,80 +216,146 @@ export default function WebsitePage() {
               </FormItem>
             )}
           />
-          <FormField
-            control={websitesForm.control}
-            name="language"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("language")}</FormLabel>
-                <Select
-                  key={field.value}
-                  onValueChange={field.onChange}
-                  value={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger className="w-full">
-                      <SelectValue />
-                    </SelectTrigger>
-                  </FormControl>
-                  <LanguageOptions />
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
-          <FormField
-            control={websitesForm.control}
-            name="color"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("color")}</FormLabel>
-                <Select
-                  key={field.value}
-                  onValueChange={field.onChange}
-                  value={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger className="w-full">
-                      <SelectValue />
-                    </SelectTrigger>
-                  </FormControl>
-                  <ColorOptions />
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="grid grid-cols-2 gap-2">
+            <FormField
+              control={websitesForm.control}
+              name="language"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("language")}</FormLabel>
+                  <Select
+                    key={field.value}
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="w-full">
+                        <SelectValue />
+                      </SelectTrigger>
+                    </FormControl>
+                    <LanguageOptions />
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-          <FormField
-            control={websitesForm.control}
-            name="style"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("style")}</FormLabel>
-                <Select
-                  key={field.value}
-                  onValueChange={field.onChange}
-                  value={field.value}
-                >
+            <FormField
+              control={websitesForm.control}
+              name="contactOption"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("contactOptions")}</FormLabel>
+                  <Select
+                    key={field.value}
+                    onValueChange={field.onChange}
+                    value={field.value || undefined}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="w-full">
+                        <SelectValue />
+                      </SelectTrigger>
+                    </FormControl>
+                    <ContactOptionOptions />
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-2">
+            <FormField
+              control={websitesForm.control}
+              name="color"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("color")}</FormLabel>
+                  <Select
+                    key={field.value}
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="w-full">
+                        <SelectValue />
+                      </SelectTrigger>
+                    </FormControl>
+                    <ColorOptions />
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={websitesForm.control}
+              name="style"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("style")}</FormLabel>
+                  <Select
+                    key={field.value}
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="w-full">
+                        <SelectValue />
+                      </SelectTrigger>
+                    </FormControl>
+                    <StyleOptions />
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <FormLabel>{t("phone")}</FormLabel>
+          <div className="flex w-full">
+            <FormField
+              control={websitesForm.control}
+              name="countryCode"
+              render={({ field }) => (
+                <FormItem>
                   <FormControl>
-                    <SelectTrigger className="w-full">
-                      <SelectValue />
-                    </SelectTrigger>
+                    <PhoneInput
+                      value={field.value || ""}
+                      onChange={field.onChange}
+                      className="pl-2 pr-1 w-16 justify-end rounded-r-none"
+                    />
                   </FormControl>
-                  <StyleOptions />
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={websitesForm.control}
+              name="phone"
+              render={({ field }) => (
+                <>
+                  <FormItem className="w-full">
+                    <FormControl>
+                      <Input
+                        value={field.value || ""}
+                        onChange={field.onChange}
+                        className="rounded-l-none border-l-0"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                </>
+              )}
+            />
+          </div>
 
           <FormField
             control={websitesForm.control}
             name="instagram"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="mb-1">
                 <FormLabel>{t("socials")}</FormLabel>
 
                 <FormControl>
@@ -304,7 +370,6 @@ export default function WebsitePage() {
                     />
                   </InputGroup>
                 </FormControl>
-                <FormMessage />
               </FormItem>
             )}
           />
@@ -313,7 +378,7 @@ export default function WebsitePage() {
             control={websitesForm.control}
             name="facebook"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="mb-1">
                 <FormControl>
                   <InputGroup>
                     <InputGroupAddon>
@@ -326,7 +391,6 @@ export default function WebsitePage() {
                     />
                   </InputGroup>
                 </FormControl>
-                <FormMessage />
               </FormItem>
             )}
           />
@@ -335,7 +399,7 @@ export default function WebsitePage() {
             control={websitesForm.control}
             name="youtube"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="mb-1">
                 <FormControl>
                   <InputGroup>
                     <InputGroupAddon>
@@ -348,7 +412,27 @@ export default function WebsitePage() {
                     />
                   </InputGroup>
                 </FormControl>
-                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={websitesForm.control}
+            name="website"
+            render={({ field }) => (
+              <FormItem className="mb-1">
+                <FormControl>
+                  <InputGroup>
+                    <InputGroupAddon>
+                      <GlobeIcon className="size-4 mr-1" />
+                    </InputGroupAddon>
+                    <InputGroupInput
+                      placeholder={t("website")}
+                      value={field.value ?? ""}
+                      onChange={field.onChange}
+                    />
+                  </InputGroup>
+                </FormControl>
               </FormItem>
             )}
           />
@@ -374,89 +458,6 @@ export default function WebsitePage() {
               </FormItem>
             )}
           />
-
-          <FormField
-            control={websitesForm.control}
-            name="website"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <InputGroup>
-                    <InputGroupAddon>
-                      <GlobeIcon className="size-4 mr-1" />
-                    </InputGroupAddon>
-                    <InputGroupInput
-                      placeholder={t("website")}
-                      value={field.value ?? ""}
-                      onChange={field.onChange}
-                    />
-                  </InputGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormLabel>{t("phone")}</FormLabel>
-          <div className="flex w-full">
-            <FormField
-              control={websitesForm.control}
-              name="countryCode"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <PhoneInput
-                      value={field.value || ""}
-                      onChange={field.onChange}
-                      className="pl-2 pr-1 w-16 justify-end rounded-r-none"
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={websitesForm.control}
-              name="phone"
-              render={({ field }) => (
-                <>
-                  <FormItem className="w-full">
-                    <FormControl>
-                      <Input
-                        value={field.value || ""}
-                        onChange={field.onChange}
-                        className="rounded-l-none border-l-0"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                </>
-              )}
-            />
-          </div>
-
-          <FormField
-            control={websitesForm.control}
-            name="contactOption"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("contactOptions")}</FormLabel>
-                <Select
-                  key={field.value}
-                  onValueChange={field.onChange}
-                  value={field.value || undefined}
-                >
-                  <FormControl>
-                    <SelectTrigger className="w-full">
-                      <SelectValue />
-                    </SelectTrigger>
-                  </FormControl>
-                  <ContactOptionOptions />
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
           <FormField
             control={websitesForm.control}
             name="active"

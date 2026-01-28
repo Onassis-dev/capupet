@@ -1,5 +1,6 @@
 import { z } from "zod/v4";
 import { contactOptionsArray, stylesArray } from "../../db/websites.db";
+import { emailSchema } from "../../lib/schemas";
 
 export const websiteSchema = z.object({
   active: z.boolean(),
@@ -11,7 +12,7 @@ export const websiteSchema = z.object({
   instagram: z.string().nullable(),
   facebook: z.string().nullable(),
   youtube: z.string().nullable(),
-  email: z.email().nullable(),
+  email: emailSchema.nullable(),
   website: z.string().nullable(),
   phone: z.string().nullable(),
   countryCode: z.string().nullable(),
