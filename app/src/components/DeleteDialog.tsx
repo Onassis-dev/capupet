@@ -19,7 +19,7 @@ type props = {
   text: string;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  successMessage: string;
+  successMessage?: string;
   deleteFunction: () => Promise<unknown>;
   queryKey?: string;
 };
@@ -55,7 +55,7 @@ const DeleteDialog = ({
       await deleteFunction();
       if (queryKey) client.invalidateQueries({ queryKey: [queryKey] });
       setOpen(false);
-      showSuccess(successMessage);
+      if (successMessage) showSuccess(successMessage);
     },
   });
 

@@ -62,7 +62,7 @@ export default function ErrorView() {
       title={title}
       message={message}
       buttonText={t("goHome")}
-      onGoHome={() => navigate("/dashboard")}
+      onGoHome={() => navigate("/")}
     />
   );
 }
@@ -101,7 +101,7 @@ export function ErrorFallback({
       buttonText={t("goHome")}
       onGoHome={() => {
         onReset();
-        navigate("/dashboard");
+        navigate("/");
       }}
     />
   );
@@ -126,7 +126,7 @@ export function NotFoundPage() {
       title={t("notFound")}
       message={null}
       buttonText={t("goHome")}
-      onGoHome={() => navigate("/dashboard")}
+      onGoHome={() => navigate("/")}
     />
   );
 }

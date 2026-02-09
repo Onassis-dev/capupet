@@ -47,7 +47,7 @@ createRoot(document.getElementById("root")!).render(
             </Route>
 
             {/* Dashboard routes */}
-            <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route element={<DashboardLayout />}>
               <Route index element={<DashboardPage />} />
               <Route path="pets" element={<PetsPage />} />
               <Route path="pets/:id" element={<PetDetailPage />} />
@@ -59,7 +59,7 @@ createRoot(document.getElementById("root")!).render(
             </Route>
 
             {/* Redirect root to dashboard */}
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route element={<Navigate to="/dashboard" replace />} />
 
             {/* Catch unmatched routes */}
             <Route path="*" element={<NotFoundPage />} />

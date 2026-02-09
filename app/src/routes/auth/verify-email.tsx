@@ -43,7 +43,7 @@ export default function VerifyEmailPage() {
     },
   });
   const [searchParams] = useSearchParams();
-  const redirect = searchParams.get("redirect") || "/dashboard";
+  const redirect = searchParams.get("redirect") || "/";
   const navigate = useNavigate();
   const [cooldown, setCooldown] = useState(0);
 

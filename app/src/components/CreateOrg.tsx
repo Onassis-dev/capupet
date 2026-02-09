@@ -61,7 +61,7 @@ export const CreateOrganization = ({ open, setOpen }: props) => {
       await get(api.organizations.$post({ json: values }));
       client.invalidateQueries({ queryKey: ["session"] });
       setOpen(false);
-      navigate("/dashboard");
+      navigate("/");
     },
   });
 

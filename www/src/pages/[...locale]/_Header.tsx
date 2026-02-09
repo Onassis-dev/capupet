@@ -32,7 +32,7 @@ export function Header({ signInText, startText }: HeaderProps) {
         <div></div>
         <div className="flex gap-2">
           <Button variant="ghost" asChild className="hidden sm:flex">
-            <a href="/dashboard">{signInText}</a>
+            <a href="/">{signInText}</a>
           </Button>
           <Button asChild>
             <a href="/signup">{startText}</a>

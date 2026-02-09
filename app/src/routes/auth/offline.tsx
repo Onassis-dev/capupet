@@ -18,7 +18,7 @@ export default function OfflinePage() {
   const navigate = useNavigate();
 
   const handleRetry = () => {
-    navigate("/dashboard");
+    navigate("/");
   };
 
   return (

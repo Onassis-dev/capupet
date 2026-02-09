@@ -50,7 +50,7 @@ export function SelectOrganization() {
     mutationFn: async (orgId: number) => {
       await get(api.users.org.$put({ json: { orgId } }));
       client.resetQueries();
-      navigate("/dashboard");
+      navigate("/");
     },
   });
 
@@ -91,7 +91,7 @@ export function SelectOrganization() {
                   variant="secondary"
                   className="text-xs h-auto px-1.5 py-1"
                   onClick={() => {
-                    navigate("/dashboard/settings");
+                    navigate("/settings");
                     setOpen(false);
                   }}
                 >
@@ -103,7 +103,7 @@ export function SelectOrganization() {
                   variant="secondary"
                   className="text-xs h-auto px-1.5 py-1"
                   onClick={() => {
-                    navigate("/dashboard/settings");
+                    navigate("/settings");
                     setOpen(false);
                   }}
                 >

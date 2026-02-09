@@ -76,7 +76,7 @@ export default function OnboardingPage() {
     ) {
       await get(api.organizations.$post({ json: values }));
       client.resetQueries();
-      navigate("/dashboard");
+      navigate("/");
     },
   });
 
@@ -86,14 +86,14 @@ export default function OnboardingPage() {
     mutationFn: async (orgId: number) => {
       await get(api.users.org.$put({ json: { orgId } }));
       client.resetQueries();
-      navigate("/dashboard");
+      navigate("/");
     },
   });
 
   if (isPending || !session) return <LoadingView />;
 
   if (session?.user?.orgName) {
-    navigate("/dashboard");
+    navigate("/");
     return null;
   }
 

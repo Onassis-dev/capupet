@@ -123,7 +123,7 @@ export default function SignUpPage() {
               onClick={async () => {
                 await authClient.signIn.social({
                   provider: "google",
-                  callbackURL: window.location.origin + "/dashboard",
+                  callbackURL: window.location.origin + "/",
                 });
               }}
             >

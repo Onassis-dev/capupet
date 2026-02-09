@@ -128,7 +128,7 @@ export default function PetsPage() {
 
       <CrudTable
         onRowClick={(row) => {
-          navigate(`/dashboard/pets/${row.id}`);
+          navigate(`/pets/${row.id}`);
         }}
         rows={data?.rows}
         status={status}

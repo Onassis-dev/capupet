@@ -18,10 +18,6 @@ export const PetNotes = () => {
       es: "¿Estás seguro de querer eliminar esta nota?",
       en: "Are you sure you want to delete this note?",
     },
-    deleteSuccessMessage: {
-      es: "Nota eliminada correctamente",
-      en: "Note deleted successfully",
-    },
   });
   const { id } = useParams();
   const client = useQueryClient();
@@ -101,7 +97,6 @@ export const PetNotes = () => {
           setSelectedNote(null);
           setOpenDelete(false);
         }}
-        successMessage={t("deleteSuccessMessage")}
       />
     </>
   );

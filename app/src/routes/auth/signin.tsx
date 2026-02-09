@@ -73,7 +73,7 @@ export default function SignInPage() {
       const { error } = await authClient.signIn.email({
         email: values.email,
         password: values.password,
-        callbackURL: window.location.origin + "/dashboard",
+        callbackURL: window.location.origin + "/",
       });
 
       if (error) {
@@ -99,7 +99,7 @@ export default function SignInPage() {
             onClick={async () => {
               await authClient.signIn.social({
                 provider: "google",
-                callbackURL: window.location.origin + "/dashboard",
+                callbackURL: window.location.origin + "/",
               });
             }}
           >

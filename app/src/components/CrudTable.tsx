@@ -41,6 +41,7 @@ export interface Column {
   title: string;
   hide?: boolean;
   transform?: (e: unknown) => unknown;
+  icon?: boolean;
 }
 
 export const CrudTable = ({
@@ -129,7 +130,10 @@ export const CrudTable = ({
                   return (
                     <TableCell
                       key={column.key}
-                      className={cn(column.hide ? "hidden sm:table-cell" : "")}
+                      className={cn(
+                        column.hide ? "hidden sm:table-cell" : "",
+                        column.icon ? "pr-0!" : ""
+                      )}
                     >
                       <span>
                         {column?.transform

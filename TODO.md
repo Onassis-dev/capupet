@@ -4,13 +4,19 @@ TODO
   - Users page
 
 - Pets
-  - Medic tab
-  - # Files tab
+  - # Medic tab
 
-- DEPLOYMENT
-
-- DETAILS
+- Extra
+  - Update tasks tab
+  - Improve responsiveness
+  - Implement a dashboard
+  - Delete organization
+  - Delete account
+  - Add captcha
+  - Improve emails
+  - Improve tabs animation
+  - Add mobile header
   - Optimize ugc bundle-size
   - Website preview
-  - Complete todos
-  - Animate tabs
+
+- DEPLOYMENT

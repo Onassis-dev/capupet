@@ -57,7 +57,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild isActive={isActive(location, undefined)}>
-              <Link to="/dashboard">
+              <Link to="/">
                 <Home className="size-5!" strokeWidth={1.8} />
                 <span>{t("home")}</span>
               </Link>
@@ -66,7 +66,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           {session?.user?.pets && (
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={isActive(location, "pets")}>
-                <Link to="/dashboard/pets">
+                <Link to="/pets">
                   <PawPrint className="size-5!" strokeWidth={1.8} />
                   <span>{t("pets")}</span>
                 </Link>
@@ -79,7 +79,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 asChild
                 isActive={isActive(location, "adopters")}
               >
-                <Link to="/dashboard/adopters">
+                <Link to="/adopters">
                   <Users className="size-5!" strokeWidth={1.8} />
                   <span>{t("adopters")}</span>
                 </Link>
@@ -89,7 +89,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           {session?.user?.tasks && (
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={isActive(location, "tasks")}>
-                <Link to="/dashboard/tasks">
+                <Link to="/tasks">
                   <CircleCheckBig className="size-5!" strokeWidth={1.8} />
                   <span>{t("tasks")}</span>
                 </Link>
@@ -102,7 +102,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 asChild
                 isActive={isActive(location, "website")}
               >
-                <Link to="/dashboard/website">
+                <Link to="/website">
                   <AppWindowMacIcon className="size-5!" strokeWidth={1.8} />
                   <span>{t("website")}</span>
                 </Link>
@@ -116,7 +116,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               isActive={isActive(location, "settings")}
             >
-              <Link to="/dashboard/settings">
+              <Link to="/settings">
                 <Settings className="size-5!" strokeWidth={1.8} />
                 <span>{t("settings")}</span>
               </Link>

@@ -183,6 +183,13 @@
       "when": 1769648959755,
       "tag": "0025_chilly_albert_cleary",
       "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "7",
+      "when": 1770660517759,
+      "tag": "0026_shocking_jack_murdock",
+      "breakpoints": true
     }
   ]
 }

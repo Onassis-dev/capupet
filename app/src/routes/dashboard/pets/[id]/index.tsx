@@ -22,6 +22,7 @@ import { useParams } from "react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getPetGeneralInfo } from "./queries";
 import { PetNotes } from "./notes/PetNotes";
+import { PetFiles } from "./files/PetFiles";
 
 export default function PetDetailPage() {
   const t = useI18n({
@@ -157,7 +158,9 @@ export default function PetDetailPage() {
         <TabsContent value="notes">
           <PetNotes />
         </TabsContent>
-        <TabsContent value="files">Files</TabsContent>
+        <TabsContent value="files">
+          <PetFiles />
+        </TabsContent>
       </Tabs>
     </PageWrapper>
   );
