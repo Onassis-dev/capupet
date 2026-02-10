@@ -24,7 +24,7 @@ export const PageWrapper = ({
                     orientation="vertical"
                     className="data-[orientation=vertical]:h-4"
                   /> */}
-        {title && <h1 className={"font-bold text-4xl"}>{title}</h1>}
+        {title && <h1 className={"font-bold text-3xl sm:text-4xl"}>{title}</h1>}
       </header>
 
       <div>{children}</div>

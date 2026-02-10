@@ -142,7 +142,7 @@ export default function PetDetailPage() {
             <Badge variant="secondary">{t(data?.status as any)}</Badge>
           </div>
         </div>
-        <TabsList className="mb-6 w-[calc(100%+2rem)] -mx-4 sm:mx-0 sm:w-full text-sm sm:text-base">
+        <TabsList className="mb-6 w-[calc(100%+2rem)] -mx-4 sm:mx-0 sm:w-full">
           <TabsTrigger value="general">{t("general")}</TabsTrigger>
           <TabsTrigger value="public">{t("public")}</TabsTrigger>
           <TabsTrigger value="medical">{t("medical")}</TabsTrigger>

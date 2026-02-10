@@ -33,14 +33,14 @@ export default function SettingsPage() {
   return (
     <PageWrapper title={t("title")} size="sm">
       <Tabs defaultValue="org" className="">
-        <TabsList className="mb-6 w-full text-sm sm:text-base flex justify-start gap-2">
-          <TabsTrigger className="flex-none" value="org">
+        <TabsList className="mb-6 gap-2 justify-start w-[calc(100%+2rem)] -mx-4 sm:mx-0 sm:w-full">
+          <TabsTrigger value="org" className="max-w-32">
             {t("organization")}
           </TabsTrigger>
-          <TabsTrigger className="flex-none" value="account">
+          <TabsTrigger value="account" className="max-w-32">
             {t("account")}
           </TabsTrigger>
-          <TabsTrigger className="flex-none" value="users">
+          <TabsTrigger value="users" className="max-w-32">
             {t("users")}
           </TabsTrigger>
         </TabsList>

@@ -11,8 +11,6 @@ TODO
   - Delete account
   - Add captcha
   - Improve emails
-  - Improve tabs animation
-  - # Add mobile header
   - Optimize ugc bundle-size
   - Website preview
   - Fix error messages

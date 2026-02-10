@@ -1,4 +1,4 @@
-import { Loader2 } from "lucide-react";
+import { Loader2, PlusIcon } from "lucide-react";
 import { Button, buttonVariants } from "@workspace/ui/components/ui/button";
 import type { ComponentProps } from "react";
 import { type VariantProps } from "class-variance-authority";
@@ -37,6 +37,7 @@ export const RegisterButton = ({
       variant="default"
     >
       <span className="sr-only sm:not-sr-only">{children}</span>
+      <PlusIcon className="h-4 w-5! sm:hidden" />
     </Button>
   );
 };
