@@ -66,7 +66,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SelectOrganization />
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive={isActive(location, undefined)}>
+            <SidebarMenuButton asChild isActive={location === "/"}>
               <Link to="/">
                 <Home className="size-5!" strokeWidth={1.8} />
                 <span>{t("home")}</span>

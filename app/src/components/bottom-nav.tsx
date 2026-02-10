@@ -2,6 +2,7 @@ import {
   AppWindowMacIcon,
   CircleCheckBig,
   Ellipsis,
+  Home,
   PawPrint,
 } from "lucide-react";
 import { Link, useLocation } from "react-router";
@@ -19,6 +20,7 @@ export function BottomNav() {
     website: { es: "Web", en: "Web" },
     tasks: { es: "Tareas", en: "Tasks" },
     more: { es: "Más", en: "More" },
+    home: { es: "Inicio", en: "Home" },
   });
 
   return (
@@ -37,6 +39,14 @@ export function BottomNav() {
           icon={<AppWindowMacIcon className="size-5" strokeWidth={1.8} />}
           label={t("website")}
           isActive={active === "website"}
+        />
+      )}
+      {session?.user?.pets && (
+        <NavItem
+          to="/"
+          icon={<Home className="size-5" strokeWidth={1.8} />}
+          label={t("home")}
+          isActive={active === ""}
         />
       )}
       {session?.user?.tasks && (
