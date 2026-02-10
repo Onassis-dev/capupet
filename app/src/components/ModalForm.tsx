@@ -57,7 +57,7 @@ export const ModalForm = ({
         showCloseButton={true}
         className="max-w-full sm:max-w-md h-screen sm:h-auto  grid-rows-[auto_1fr] rounded-none sm:rounded-3xl p-0"
       >
-        <DialogHeader className="p-4 sm:p-6 pb-0">
+        <DialogHeader className="p-4 sm:p-6 pb-0!">
           <DialogTitle className="text-left text-2xl">{title}</DialogTitle>
         </DialogHeader>
 
