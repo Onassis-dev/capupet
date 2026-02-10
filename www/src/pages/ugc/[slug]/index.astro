@@ -1,6 +1,7 @@
 ---
 import UGCLayout from "@/layouts/UGCLayout.astro";
-import { MainUGC } from "@workspace/ui/components/ugc/MainUGC";
+import { MainUGC } from "../../../ugc/MainUGC.tsx";
+import UGCFooter from "@/layouts/UGCFooter.astro";
 
 const { slug } = Astro.params;
 
@@ -25,4 +26,5 @@ try {
     apiOrigin={import.meta.env.API_ORIGIN}
     slug={slug!}
   />
+  <UGCFooter website={website} />
 </UGCLayout>

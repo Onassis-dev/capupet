@@ -1,4 +1,4 @@
-import { StylesTypes } from "./types";
+import type { StylesTypes } from "./types";
 const defineStyles = (styles: Record<StylesTypes, string>, style: string) => {
   return styles[style as StylesTypes];
 };

@@ -58,7 +58,7 @@ const DeleteDialog = ({
       await deleteFunction();
       if (queryKey) client.invalidateQueries({ queryKey: [queryKey] });
       setOpen(false);
-      showSuccess(t("deleted"), { duration: 1500 });
+      showSuccess(t("deleted"), { duration: 2000 });
     },
   });
 

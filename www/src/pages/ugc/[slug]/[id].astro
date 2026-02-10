@@ -1,6 +1,19 @@
 ---
 import UGCLayout from "@/layouts/UGCLayout.astro";
-import { PetUGC } from "@workspace/ui/components/ugc/PetUGC";
+import UGCFooter from "@/layouts/UGCFooter.astro";
+import HeaderUGC from "../../../ugc/HeaderUGC.astro";
+import {
+  iconColor,
+  listedInformationStyle,
+  buttonStyle,
+  buttonColor,
+} from "../../../ugc/styles";
+import { ugcI18n } from "../../../ugc/ugc-i18n";
+import Mars from "@lucide/astro/icons/mars";
+import Ruler from "@lucide/astro/icons/ruler";
+import Scale from "@lucide/astro/icons/scale";
+import MailIcon from "@lucide/astro/icons/mail";
+import Calendar from "@lucide/astro/icons/calendar";
 const { slug, id } = Astro.params;
 
 let website: any;
@@ -15,8 +28,160 @@ try {
   console.error(error);
   return Astro.rewrite("/es");
 }
+
+const pet = website.pet;
+
+const t = ugcI18n(website.lang);
+
+const calculateAge = (bornDate: string | null): string => {
+  if (!bornDate) return "-";
+
+  const birthDate = new Date(bornDate);
+  const today = new Date();
+
+  let years = today.getFullYear() - birthDate.getFullYear();
+  let months = today.getMonth() - birthDate.getMonth();
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  if (years < 0) return "-";
+
+  const yearLabel = years === 1 ? t("year") : t("years");
+  const monthLabel = months === 1 ? t("month") : t("months");
+
+  if (years === 0) {
+    return `${months} ${monthLabel}`;
+  } else {
+    return `${years} ${yearLabel}`;
+  }
+};
 ---
 
 <UGCLayout website={website}>
-  <PetUGC client:load website={website} pet={website.pet} slug={slug!} />
+  <HeaderUGC website={website} slug={slug!} />
+
+  <main class="w-full max-w-xl mx-auto px-4 pt-16 pb-24">
+    <section class="flex items-center gap-4 pb-5 flex-col">
+      {
+        pet.image && (
+          <img
+            src={pet?.image || "no Image"}
+            alt={pet.name}
+            class="size-40 aspect-square object-cover rounded-full "
+          />
+        )
+      }
+      <h1 class="text-3xl font-bold">{pet.name}</h1>
+    </section>
+
+    {/* Listed information */}
+    <section class="grid grid-cols-2 gap-3 pt-5">
+      <div class={listedInformationStyle(website.style)}>
+        <Calendar class={iconColor(website.color)} />
+        <div class="flex flex-col">
+          <span class="text-sm text-neutral-500 font-medium">
+            {t("age")}
+          </span>
+          <span>{calculateAge(pet.bornDate)}</span>
+        </div>
+      </div>
+      <div class={listedInformationStyle(website.style)}>
+        <Scale class={iconColor(website.color)} />
+        <div class="flex flex-col">
+          <span class="text-sm text-neutral-500 font-medium">
+            {t("weight")}
+          </span>
+          <span>
+            {pet.weight || "-"}
+            {pet.measurement}
+          </span>
+        </div>
+      </div>
+      <div class={listedInformationStyle(website.style)}>
+        <Mars class={iconColor(website.color)} />
+        <div class="flex flex-col">
+          <span class="text-sm text-neutral-500 font-medium">
+            {t("sex")}
+          </span>
+          <span>{t(pet.sex as any)}</span>
+        </div>
+      </div>
+      <div class={listedInformationStyle(website.style)}>
+        <Ruler class={iconColor(website.color)} />
+        <div class="flex flex-col">
+          <span class="text-sm text-neutral-500 font-medium">
+            {t("size")}
+          </span>
+          <span>{pet.size ? t(pet.size as any) : "-"}</span>
+        </div>
+      </div>
+    </section>
+
+    {/* Description */}
+    {
+      pet.description && (
+        <section class="mt-10 ">
+          <h2 class="text-xl font-bold">
+            {t("about")} {pet.name}
+          </h2>
+          <p class="mt-2">{pet.description}</p>
+        </section>
+      )
+    }
+
+    {/* Gallery */}
+    {
+      pet.images && pet.images.length > 0 && (
+        <section class="mt-10">
+          <h2 class="text-xl font-bold mb-4">{t("gallery")}</h2>
+          <div class="grid sm:grid-cols-2 gap-3">
+            {pet.images.map((image: string, index: number) => (
+              <img
+                src={image}
+                alt={`Imagen ${index + 1}`}
+                class="w-full aspect-square object-cover rounded-xl"
+              />
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      website.contactOption === "whatsapp" && (
+        <a
+          href={`https://wa.me/${website.countryCode}${website.phone}?text=${encodeURIComponent(t("getInfo") + " " + pet.name)}`}
+          class={`${buttonStyle(website.style)} ${buttonColor(website.color)} w-full flex items-center gap-2 justify-center mt-10 sticky bottom-10 py-2`}
+        >
+          <svg
+            role="img"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            class="size-4"
+            fill="currentColor"
+          >
+            <title>WhatsApp</title>
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+          </svg>
+          {t("askAbout")} {pet.name}
+        </a>
+      )
+    }
+
+    {
+      website.contactOption === "email" && (
+        <a
+          href={`mailto:${website.email}?subject=${encodeURIComponent(t("getInfo") + " " + pet.name)}`}
+          class={`${buttonStyle(website.style)} ${buttonColor(website.color)} w-full flex items-center gap-2 justify-center mt-10 sticky bottom-10 py-2`}
+        >
+          <MailIcon class="size-4" /> {t("askAbout")} {pet.name}
+        </a>
+      )
+    }
+  </main>
+
+  <UGCFooter website={website} />
 </UGCLayout>

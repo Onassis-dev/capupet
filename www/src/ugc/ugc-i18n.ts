@@ -1,4 +1,4 @@
-import { Lang } from "./types";
+import type { Lang } from "./types";
 
 const texts = {
   all: {

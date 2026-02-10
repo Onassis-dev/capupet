@@ -11,11 +11,10 @@ TODO
   - Delete account
   - Add captcha
   - Improve emails
-  - Optimize ugc bundle-size
-  - Website preview
   - Fix error messages
   - Add extra info to pet
-  - Save changes buttons
-  - Close forms
+  - Add filters to tables
+  - Separate tailwind bundles
+  - ## Save changes buttons
 
 - DEPLOYMENT

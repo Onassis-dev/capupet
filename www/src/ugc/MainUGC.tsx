@@ -10,9 +10,8 @@ import {
   titleStyle,
 } from "./styles";
 import { ugcI18n } from "./ugc-i18n";
-import { Website } from "./types";
+import type { Website } from "./types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { FooterUGC } from "./FooterUGC";
 
 interface Props {
   website: Website;
@@ -229,8 +228,6 @@ export const MainUGC = ({ website, apiOrigin, slug }: Props) => {
           </div>
         </section>
       </main>
-
-      <FooterUGC website={website} slug={slug} />
     </>
   );
 };

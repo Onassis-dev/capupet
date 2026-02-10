@@ -1,0 +1,19 @@
+---
+import { ChevronLeft } from "lucide-react";
+const { website, slug } = Astro.props;
+---
+
+<header class="w-full sticky top-0 bg-background border-b z-10">
+  <div
+    class="flex items-center max-w-xl mx-auto px-4 py-3 justify-center relative"
+  >
+    <a href={`/ugc/${slug}`} class="cursor-pointer absolute left-4">
+      <ChevronLeft />
+    </a>
+    <h1
+      class="text-xl font-bold px-6 overflow-hidden text-ellipsis whitespace-nowrap"
+    >
+      {website.title}
+    </h1>
+  </div>
+</header>

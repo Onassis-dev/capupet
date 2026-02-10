@@ -54,14 +54,14 @@ export const ModalForm = ({
       </DialogTrigger>
 
       <DialogContent
-        showCloseButton={false}
+        showCloseButton={true}
         className="max-w-full sm:max-w-md h-screen sm:h-auto  grid-rows-[auto_1fr] rounded-none sm:rounded-3xl p-0"
       >
-        <DialogHeader className="p-6 pb-0">
-          <DialogTitle>{title}</DialogTitle>
+        <DialogHeader className="p-4 sm:p-6 pb-0">
+          <DialogTitle className="text-left text-2xl">{title}</DialogTitle>
         </DialogHeader>
 
-        <div className="overflow-y-auto p-6 flex flex-col h-full">
+        <div className="overflow-y-auto p-4 sm:p-6 flex flex-col h-full">
           {children}
 
           <DialogFooter className="mt-auto">

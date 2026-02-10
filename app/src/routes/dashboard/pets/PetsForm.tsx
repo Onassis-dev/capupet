@@ -26,6 +26,7 @@ import {
   SpeciesOptions,
   StatusOptions,
 } from "@/components/select-options";
+import { useNavigate } from "react-router";
 
 const defaultValues = {
   name: "",
@@ -37,6 +38,7 @@ const defaultValues = {
 export const PetsForm = () => {
   const client = useQueryClient();
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const t = useI18n({
     registerPet: {
@@ -74,8 +76,9 @@ export const PetsForm = () => {
     mutationFn: async function sendData(
       values: z.infer<typeof createPetSchema>
     ) {
-      await get(api.pets.$post({ json: values }));
+      const res = await get(api.pets.$post({ json: values }));
 
+      navigate(`/pets/${res.id}`);
       client.invalidateQueries({ queryKey: ["pets"] });
       petsForm.reset(defaultValues);
       setOpen(false);

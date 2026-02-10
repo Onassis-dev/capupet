@@ -89,12 +89,15 @@ export const petsRoute = new Hono<{ Variables: Variables }>()
   .post("/", validator("json", createPetSchema), async (c) => {
     const data = c.req.valid("json");
 
-    await db.insert(pets).values({
-      ...data,
-      organizationId: c.get("orgId"),
-    });
+    const [pet] = await db
+      .insert(pets)
+      .values({
+        ...data,
+        organizationId: c.get("orgId"),
+      })
+      .returning({ id: pets.id });
 
-    return c.json({});
+    return c.json(pet);
   })
 
   .get("/general", validator("query", deleteSchema), async (c) => {
