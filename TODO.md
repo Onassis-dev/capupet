@@ -3,9 +3,6 @@ TODO
 - Settings
   - Users page
 
-- Pets
-  - # Medic tab
-
 - Extra
   - Update tasks tab
   - Improve responsiveness
@@ -15,8 +12,11 @@ TODO
   - Add captcha
   - Improve emails
   - Improve tabs animation
-  - Add mobile header
+  - # Add mobile header
   - Optimize ugc bundle-size
   - Website preview
+  - Fix error messages
+  - Fix success messages
+  - Add extra info to pet
 
 - DEPLOYMENT

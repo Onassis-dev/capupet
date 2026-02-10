@@ -23,6 +23,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getPetGeneralInfo } from "./queries";
 import { PetNotes } from "./notes/PetNotes";
 import { PetFiles } from "./files/PetFiles";
+import { PetMedical } from "./medical/PetMedical";
 
 export default function PetDetailPage() {
   const t = useI18n({
@@ -154,7 +155,9 @@ export default function PetDetailPage() {
         <TabsContent value="public">
           <PublicInfo data={data} />
         </TabsContent>
-        <TabsContent value="medical">Medical</TabsContent>
+        <TabsContent value="medical">
+          <PetMedical />
+        </TabsContent>
         <TabsContent value="notes">
           <PetNotes />
         </TabsContent>

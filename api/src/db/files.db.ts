@@ -8,5 +8,7 @@ export const files = pgTable("files", {
   name: text().notNull(),
   extension: text().notNull(),
   createdAt: timestamp().notNull().defaultNow(),
-  petId: integer().references(() => pets.id, { onDelete: "cascade" }),
+  petId: integer()
+    .notNull()
+    .references(() => pets.id, { onDelete: "cascade" }),
 });

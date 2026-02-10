@@ -11,6 +11,9 @@ import { websitesRoute } from "./routes/websites/websites.route";
 import { publicRoute } from "./routes/public/public.route";
 import { notesRoute } from "./routes/notes/notes.route";
 import { filesRoute } from "./routes/files/files.route";
+import { vaccinesRoute } from "./routes/vaccines/vaccines.route";
+import { proceduresRoute } from "./routes/procedures/procedures.route";
+import { medicalRoute } from "./routes/medical/medical.route";
 
 export type Variables = {
   userId: string;
@@ -39,12 +42,15 @@ const app = new Hono<{ Variables: Variables }>()
   .route("/images", imagesRoute)
   .route("/adopters", adoptersRoute)
   .route("/tasks", tasksRoute)
+  .route("/vaccines", vaccinesRoute)
+  .route("/procedures", proceduresRoute)
   .route("/users", usersRoute)
   .route("/organizations", organizationsRoute)
   .route("/websites", websitesRoute)
   .route("/public", publicRoute)
   .route("/notes", notesRoute)
-  .route("/files", filesRoute);
+  .route("/files", filesRoute)
+  .route("/medical", medicalRoute);
 
 export default app;
 

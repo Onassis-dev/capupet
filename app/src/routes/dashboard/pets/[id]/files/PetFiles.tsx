@@ -50,7 +50,7 @@ export const PetFiles = () => {
         <FilesForm />
       </div>
 
-      <div className="sm:border rounded-2xl sm:overflow-hidden border-b-0">
+      <div className="sm:border rounded-2xl sm:overflow-hidden border-b-0!">
         <CrudTable
           rows={files}
           status="success"

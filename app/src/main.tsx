@@ -28,6 +28,8 @@ import AdoptersPage from "./routes/dashboard/adopters/index";
 import TasksPage from "./routes/dashboard/tasks/index";
 import WebsitePage from "./routes/dashboard/website/index";
 import SettingsPage from "./routes/dashboard/settings/index";
+import VaccinesPage from "./routes/dashboard/vaccines/index";
+import ProceduresPage from "./routes/dashboard/procedures/index";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -53,6 +55,8 @@ createRoot(document.getElementById("root")!).render(
               <Route path="pets/:id" element={<PetDetailPage />} />
               <Route path="adopters" element={<AdoptersPage />} />
               <Route path="tasks" element={<TasksPage />} />
+              <Route path="vaccines" element={<VaccinesPage />} />
+              <Route path="procedures" element={<ProceduresPage />} />
               <Route path="website" element={<WebsitePage />} />
               <Route path="settings" element={<SettingsPage />} />
               <Route path="*" element={<NotFoundPage />} />

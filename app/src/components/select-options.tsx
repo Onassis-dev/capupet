@@ -8,6 +8,8 @@ import {
   MarsIcon,
   VenusIcon,
   MailIcon,
+  SyringeIcon,
+  Slice,
 } from "lucide-react";
 import { WhatsAppIcon } from "@workspace/ui/components/icons";
 
@@ -273,11 +275,37 @@ export const ContactOptionOptions = () => {
   return (
     <SelectContent>
       <SelectItem value="whatsapp">
-        <WhatsAppIcon className="size-4" /> WhatsApp
+        <WhatsAppIcon /> WhatsApp
       </SelectItem>
       <SelectItem value="email">
-        <MailIcon className="size-4" />
+        <MailIcon />
         {t("email")}
+      </SelectItem>
+    </SelectContent>
+  );
+};
+
+export const MedicalOptionTypeOptions = () => {
+  const t = useI18n({
+    vaccine: {
+      es: "Vacuna",
+      en: "Vaccine",
+    },
+    procedure: {
+      es: "Procedimiento",
+      en: "Procedure",
+    },
+  });
+
+  return (
+    <SelectContent>
+      <SelectItem value="vaccine">
+        <SyringeIcon />
+        {t("vaccine")}
+      </SelectItem>
+      <SelectItem value="procedure">
+        <Slice />
+        {t("procedure")}
       </SelectItem>
     </SelectContent>
   );

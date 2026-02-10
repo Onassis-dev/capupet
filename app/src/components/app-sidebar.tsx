@@ -5,6 +5,8 @@ import {
   Home,
   PawPrint,
   Settings,
+  Slice,
+  Syringe,
   Users,
 } from "lucide-react";
 import {
@@ -33,6 +35,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     adopters: {
       es: "Adoptantes",
       en: "Adopters",
+    },
+    vaccines: {
+      es: "Vacunas",
+      en: "Vaccines",
+    },
+    procedures: {
+      es: "Procedimientos",
+      en: "Procedures",
     },
     tasks: {
       es: "Tareas",
@@ -86,6 +96,32 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </SidebarMenuButton>
             </SidebarMenuItem>
           )}
+          {session?.user?.pets && (
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                asChild
+                isActive={isActive(location, "vaccines")}
+              >
+                <Link to="/vaccines">
+                  <Syringe className="size-5!" strokeWidth={1.8} />
+                  <span>{t("vaccines")}</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          )}
+          {session?.user?.pets && (
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                asChild
+                isActive={isActive(location, "procedures")}
+              >
+                <Link to="/procedures">
+                  <Slice className="size-5!" strokeWidth={1.8} />
+                  <span>{t("procedures")}</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          )}
           {session?.user?.tasks && (
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={isActive(location, "tasks")}>
@@ -129,5 +165,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 }
 
 function isActive(location: string, tab?: string) {
-  return location.split("/")[2] === tab;
+  return location.split("/")[1] === tab;
 }

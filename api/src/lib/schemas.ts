@@ -6,6 +6,7 @@ export const emailSchema = z.email().or(z.string().length(0));
 
 export const dateSchema = z
   .string()
+  .min(1)
   .or(z.string().regex(/^\d{4}-\d{2}-\d{2}$/));
 
 export const timeSchema = z
