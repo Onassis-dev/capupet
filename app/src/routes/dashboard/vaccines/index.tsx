@@ -27,10 +27,6 @@ export default function VaccinesPage() {
       es: "¿Estás seguro de querer eliminar esta vacuna?",
       en: "Are you sure you want to delete this vaccine?",
     },
-    deleteSuccessMessage: {
-      es: "Vacuna eliminada correctamente",
-      en: "Vaccine deleted successfully",
-    },
     pageTitle: {
       es: "Vacunas",
       en: "Vaccines",
@@ -97,7 +93,6 @@ export default function VaccinesPage() {
         deleteFunction={() =>
           get(api.vaccines.$delete({ json: { id: Number(selectedRow?.id) } }))
         }
-        successMessage={t("deleteSuccessMessage")}
       />
     </PageWrapper>
   );

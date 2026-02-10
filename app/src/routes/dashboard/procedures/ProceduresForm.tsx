@@ -8,7 +8,6 @@ import {
 } from "@workspace/ui/components/ui/form";
 import { Input } from "@workspace/ui/components/ui/input";
 import { useEffect } from "react";
-import { showSuccess } from "@/lib/toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -57,14 +56,6 @@ export const ProceduresForm = ({
       es: "Descripción",
       en: "Description",
     },
-    procedureUpdated: {
-      es: "Procedimiento actualizado",
-      en: "Procedure updated",
-    },
-    procedureRegistered: {
-      es: "Procedimiento registrado",
-      en: "Procedure registered",
-    },
   });
 
   const proceduresForm = useForm<z.infer<typeof procedureSchema>>({
@@ -82,7 +73,6 @@ export const ProceduresForm = ({
         );
       else await get(api.procedures.$post({ json: values }));
 
-      showSuccess(procedure ? t("procedureUpdated") : t("procedureRegistered"));
       client.invalidateQueries({ queryKey: ["procedures"] });
       setOpen(false);
     },

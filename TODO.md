@@ -14,7 +14,8 @@ TODO
   - Optimize ugc bundle-size
   - Website preview
   - Fix error messages
-  - Fix success messages
   - Add extra info to pet
+  - Save changes buttons
+  - Close forms
 
 - DEPLOYMENT

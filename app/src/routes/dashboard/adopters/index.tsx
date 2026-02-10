@@ -31,10 +31,6 @@ export default function AdoptersPage() {
       es: "¿Estás seguro de querer eliminar este adoptante?",
       en: "Are you sure you want to delete this adopter?",
     },
-    deleteSuccessMessage: {
-      es: "Adoptante eliminado correctamente",
-      en: "Adopter deleted successfully",
-    },
     title: {
       es: "Adoptantes",
       en: "Adopters",
@@ -104,7 +100,6 @@ export default function AdoptersPage() {
         deleteFunction={() =>
           get(api.adopters.$delete({ json: { id: Number(selectedRow?.id) } }))
         }
-        successMessage={t("deleteSuccessMessage")}
       />
     </PageWrapper>
   );

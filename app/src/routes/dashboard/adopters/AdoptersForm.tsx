@@ -8,7 +8,6 @@ import {
 } from "@workspace/ui/components/ui/form";
 import { Input } from "@workspace/ui/components/ui/input";
 import { useEffect } from "react";
-import { showSuccess } from "@/lib/toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -72,14 +71,6 @@ export const AdoptersForm = ({
       es: "Notas",
       en: "Notes",
     },
-    adopterUpdated: {
-      es: "Adoptante actualizado",
-      en: "Adopter updated",
-    },
-    adopterRegistered: {
-      es: "Adoptante registrado",
-      en: "Adopter registered",
-    },
   });
 
   const adoptersForm = useForm<z.infer<typeof adopterSchema>>({
@@ -95,7 +86,6 @@ export const AdoptersForm = ({
         );
       else await get(api.adopters.$post({ json: values }));
 
-      showSuccess(adopter ? t("adopterUpdated") : t("adopterRegistered"));
       client.invalidateQueries({ queryKey: ["adopters"] });
       setOpen(false);
     },

@@ -8,7 +8,6 @@ import {
 } from "@workspace/ui/components/ui/form";
 import { Input } from "@workspace/ui/components/ui/input";
 import { useEffect } from "react";
-import { showSuccess } from "@/lib/toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -57,14 +56,6 @@ export const VaccinesForm = ({
       es: "Descripción",
       en: "Description",
     },
-    vaccineUpdated: {
-      es: "Vacuna actualizada",
-      en: "Vaccine updated",
-    },
-    vaccineRegistered: {
-      es: "Vacuna registrada",
-      en: "Vaccine registered",
-    },
   });
 
   const vaccinesForm = useForm<z.infer<typeof vaccineSchema>>({
@@ -80,7 +71,6 @@ export const VaccinesForm = ({
         );
       else await get(api.vaccines.$post({ json: values }));
 
-      showSuccess(vaccine ? t("vaccineUpdated") : t("vaccineRegistered"));
       client.invalidateQueries({ queryKey: ["vaccines"] });
       setOpen(false);
     },

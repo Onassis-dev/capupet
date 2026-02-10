@@ -33,10 +33,6 @@ export const PublicInfo = ({ data }: { data: PetGeneralInfo }) => {
       es: "¿Estás seguro de querer eliminar esta imagen?",
       en: "Are you sure you want to delete this image?",
     },
-    deleteSuccessMessage: {
-      es: "Imagen eliminada correctamente",
-      en: "Image deleted successfully",
-    },
     publicDescription: {
       es: "Descripción pública",
       en: "Public description",
@@ -221,7 +217,6 @@ export const PublicInfo = ({ data }: { data: PetGeneralInfo }) => {
           setSelectedImage(null);
           setOpenDelete(false);
         }}
-        successMessage={t("deleteSuccessMessage")}
       />
     </>
   );

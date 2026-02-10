@@ -7,7 +7,6 @@ import {
   FormMessage,
 } from "@workspace/ui/components/ui/form";
 import { Input } from "@workspace/ui/components/ui/input";
-import { showSuccess } from "@/lib/toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -60,10 +59,6 @@ export const PetsForm = () => {
       es: "Fecha de ingreso",
       en: "Admission date",
     },
-    petRegistered: {
-      es: "Mascota registrada",
-      en: "Pet registered",
-    },
     status: {
       es: "Status",
       en: "Estatus",
@@ -81,7 +76,6 @@ export const PetsForm = () => {
     ) {
       await get(api.pets.$post({ json: values }));
 
-      showSuccess(t("petRegistered"));
       client.invalidateQueries({ queryKey: ["pets"] });
       petsForm.reset(defaultValues);
       setOpen(false);

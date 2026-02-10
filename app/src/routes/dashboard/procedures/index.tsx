@@ -27,10 +27,6 @@ export default function ProceduresPage() {
       es: "¿Estás seguro de querer eliminar esta procedimiento?",
       en: "Are you sure you want to delete this procedure?",
     },
-    deleteSuccessMessage: {
-      es: "Procedimiento eliminado correctamente",
-      en: "Procedure deleted successfully",
-    },
     pageTitle: {
       es: "Procedimientos",
       en: "Procedures",
@@ -97,7 +93,6 @@ export default function ProceduresPage() {
         deleteFunction={() =>
           get(api.procedures.$delete({ json: { id: Number(selectedRow?.id) } }))
         }
-        successMessage={t("deleteSuccessMessage")}
       />
     </PageWrapper>
   );

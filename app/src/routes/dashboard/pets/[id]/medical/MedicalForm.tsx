@@ -7,7 +7,6 @@ import {
   FormMessage,
 } from "@workspace/ui/components/ui/form";
 import { useEffect, useState } from "react";
-import { showSuccess } from "@/lib/toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -81,14 +80,6 @@ export const MedicalForm = ({
       es: "Notas",
       en: "Notes",
     },
-    recordAdded: {
-      es: "Registro médico agregado",
-      en: "Medical record added",
-    },
-    recordUpdated: {
-      es: "Registro médico actualizado",
-      en: "Medical record updated",
-    },
   });
 
   const medicalSchema = createMedicalSchema.omit({ petId: true });
@@ -115,7 +106,6 @@ export const MedicalForm = ({
         client.setQueryData(["medical", id], (old: Record<string, unknown>[]) =>
           old.map((r) => (r.id === record.id ? { ...r, ...values, type } : r))
         );
-        showSuccess(t("recordUpdated"));
       } else {
         const newRecord = await get(
           api.medical.$post({
@@ -132,7 +122,6 @@ export const MedicalForm = ({
             ...old,
           ]
         );
-        showSuccess(t("recordAdded"));
       }
 
       medicalForm.reset(defaultValues);

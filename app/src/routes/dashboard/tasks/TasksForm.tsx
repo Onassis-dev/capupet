@@ -8,7 +8,6 @@ import {
 } from "@workspace/ui/components/ui/form";
 import { Input } from "@workspace/ui/components/ui/input";
 import { useEffect } from "react";
-import { showSuccess } from "@/lib/toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -62,14 +61,6 @@ export const TasksForm = ({ task, open, setOpen, setSelectedTask }: props) => {
       es: "Todo el día",
       en: "All day",
     },
-    taskUpdated: {
-      es: "Tarea actualizada",
-      en: "Task updated",
-    },
-    taskRegistered: {
-      es: "Tarea registrada",
-      en: "Task registered",
-    },
   });
 
   const tasksForm = useForm<z.infer<typeof taskSchema>>({
@@ -83,7 +74,6 @@ export const TasksForm = ({ task, open, setOpen, setSelectedTask }: props) => {
         await get(api.tasks.$put({ json: { ...values, id: Number(task.id) } }));
       else await get(api.tasks.$post({ json: values }));
 
-      showSuccess(task ? t("taskUpdated") : t("taskRegistered"));
       client.invalidateQueries({ queryKey: ["tasks"] });
       setOpen(false);
     },

@@ -6,7 +6,6 @@ import {
   FormMessage,
 } from "@workspace/ui/components/ui/form";
 import { useEffect } from "react";
-import { showSuccess } from "@/lib/toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -51,14 +50,6 @@ export const NotesForm = ({ note, open, setOpen, setSelectedNote }: props) => {
       es: "Contenido",
       en: "Content",
     },
-    noteAdded: {
-      es: "Nota agregada",
-      en: "Note added",
-    },
-    noteUpdated: {
-      es: "Nota actualizada",
-      en: "Note updated",
-    },
   });
 
   const notesForm = useForm<z.infer<typeof noteFormSchema>>({
@@ -76,7 +67,6 @@ export const NotesForm = ({ note, open, setOpen, setSelectedNote }: props) => {
         client.setQueryData(["notes", id], (old: Record<string, unknown>[]) =>
           old.map((n) => (n.id === note.id ? { ...n, content } : n))
         );
-        showSuccess(t("noteUpdated"));
       } else {
         const newNote = await get(
           api.notes.$post({ json: { petId: Number(id), content } })
@@ -85,7 +75,6 @@ export const NotesForm = ({ note, open, setOpen, setSelectedNote }: props) => {
           { ...newNote, content },
           ...old,
         ]);
-        showSuccess(t("noteAdded"));
       }
 
       notesForm.reset({ content: "" });

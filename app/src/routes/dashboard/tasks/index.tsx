@@ -31,10 +31,6 @@ export default function TasksPage() {
       es: "¿Estás seguro de querer eliminar esta tarea?",
       en: "Are you sure you want to delete this task?",
     },
-    deleteSuccessMessage: {
-      es: "Tarea eliminada correctamente",
-      en: "Task deleted successfully",
-    },
     pageTitle: {
       es: "Tareas",
       en: "Tasks",
@@ -101,7 +97,6 @@ export default function TasksPage() {
         deleteFunction={() =>
           get(api.tasks.$delete({ json: { id: Number(selectedRow?.id) } }))
         }
-        successMessage={t("deleteSuccessMessage")}
       />
     </PageWrapper>
   );

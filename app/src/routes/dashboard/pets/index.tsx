@@ -73,10 +73,6 @@ export default function PetsPage() {
       es: "¿Estás seguro de querer eliminar esta mascota?",
       en: "Are you sure you want to delete this pet?",
     },
-    deleteSuccessMessage: {
-      es: "Mascota eliminada correctamente",
-      en: "Pet deleted successfully",
-    },
     title: {
       es: "Mascotas",
       en: "Pets",
@@ -218,7 +214,6 @@ export default function PetsPage() {
         deleteFunction={() =>
           get(api.pets.$delete({ json: { id: Number(selectedRow?.id) } }))
         }
-        successMessage={t("deleteSuccessMessage")}
       />
     </PageWrapper>
   );

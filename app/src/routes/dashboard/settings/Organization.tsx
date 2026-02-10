@@ -15,7 +15,6 @@ import { api, get } from "@/lib/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "@/hooks/use-session";
 import { useState } from "react";
-import { showSuccess } from "@/lib/toast";
 import { UploadIcon } from "lucide-react";
 import z from "zod/v4";
 import { SubmitButton } from "@/components/custom-buttons";
@@ -78,7 +77,6 @@ export function Organization() {
         ? { name: values.name, file: selectedFile }
         : { name: values.name };
       await get(api.organizations.$put({ form: data }));
-      showSuccess(t("organizationUpdated"));
       queryClient.invalidateQueries({ queryKey: ["session"] });
       setSelectedFile(null);
     },

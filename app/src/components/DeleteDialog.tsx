@@ -30,7 +30,6 @@ const DeleteDialog = ({
   text,
   setOpen,
   open,
-  successMessage,
   deleteFunction,
   queryKey,
 }: props) => {
@@ -47,6 +46,10 @@ const DeleteDialog = ({
       es: "Cancelar",
       en: "Cancel",
     },
+    deleted: {
+      es: "Eliminado correctamente",
+      en: "Deleted successfully",
+    },
   });
   const client = useQueryClient();
 
@@ -55,7 +58,7 @@ const DeleteDialog = ({
       await deleteFunction();
       if (queryKey) client.invalidateQueries({ queryKey: [queryKey] });
       setOpen(false);
-      if (successMessage) showSuccess(successMessage);
+      showSuccess(t("deleted"), { duration: 1500 });
     },
   });
 
