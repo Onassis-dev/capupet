@@ -12,6 +12,7 @@ import {
 } from "./procedures.schema";
 import { medicalOptions } from "../../db/medicalOptions";
 import { deleteSchema } from "../../lib/schemas";
+import { sendError } from "../../lib/errors";
 
 export const proceduresRoute = new Hono<{ Variables: Variables }>()
   .use(checkPermission("pets"))
@@ -77,14 +78,23 @@ export const proceduresRoute = new Hono<{ Variables: Variables }>()
   .delete("/", validator("json", deleteSchema), async (c) => {
     const data = c.req.valid("json");
 
-    await db
-      .delete(medicalOptions)
-      .where(
-        and(
-          eq(medicalOptions.id, data.id),
-          eq(medicalOptions.organizationId, c.get("orgId"))
-        )
-      );
+    try {
+      await db
+        .delete(medicalOptions)
+        .where(
+          and(
+            eq(medicalOptions.id, data.id),
+            eq(medicalOptions.organizationId, c.get("orgId"))
+          )
+        );
+    } catch (error: any) {
+      if (
+        error?.cause?.constraint ===
+        "medical_medicalOptionId_medicalOptions_id_fk"
+      )
+        return sendError(c, "existingDependencies");
+      else throw error;
+    }
 
     return c.json({});
   });

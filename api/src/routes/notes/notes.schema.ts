@@ -6,10 +6,10 @@ export const selectNotesSchema = z.object({
 
 export const editNoteSchema = z.object({
   id: z.coerce.number(),
-  content: z.string().nullable(),
+  content: z.string().min(1),
 });
 
 export const createNoteSchema = z.object({
   petId: z.coerce.number(),
-  content: z.string().nullable(),
+  content: z.string().min(1),
 });

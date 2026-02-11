@@ -22,6 +22,10 @@ const errorList = {
     es: "Por favor, confirma tu email para continuar",
     en: "Please confirm your email to continue",
   },
+  existingDependencies: {
+    es: "Para eliminar el registro, primero debe eliminar los registros asociados",
+    en: "To delete the record, you must first delete the associated records",
+  },
 } as const;
 
 export function sendError(

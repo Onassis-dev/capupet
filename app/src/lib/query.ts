@@ -5,6 +5,11 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 
+const errorMessage = {
+  es: "Ocurrió un error",
+  en: "An error occurred",
+} as const;
+
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -12,8 +17,14 @@ export const queryClient = new QueryClient({
     },
   },
   mutationCache: new MutationCache({
-    onError: () => {
-      showError("An error occurred");
+    onError: (error: any) => {
+      showError(
+        error?.detail?.data?.message ||
+          errorMessage[
+            localStorage.getItem("language") as keyof typeof errorMessage
+          ] ||
+          errorMessage.en
+      );
     },
   }),
 });

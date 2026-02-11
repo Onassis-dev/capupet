@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
-import "@workspace/ui/globals.css";
+import "./app.css";
 
 // Layouts
 import RootLayout from "./layouts/RootLayout";

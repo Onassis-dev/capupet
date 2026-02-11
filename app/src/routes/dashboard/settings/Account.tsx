@@ -91,12 +91,12 @@ export function Account() {
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem className="grid grid-cols-[1fr_16rem] border-b mb-6">
+            <FormItem className="grid sm:grid-cols-[1fr_16rem] border-b mb-6">
               <div>
                 <FormLabel className="text-base">{t("name")}</FormLabel>
                 <FormDescription>{t("nameDescription")}</FormDescription>
               </div>
-              <FormControl>
+              <FormControl className="mt-2">
                 <Input value={field.value ?? ""} onChange={field.onChange} />
               </FormControl>
               <div />
@@ -109,12 +109,12 @@ export function Account() {
           control={form.control}
           name="lang"
           render={({ field }) => (
-            <FormItem className="grid grid-cols-[1fr_16rem] border-b mb-6">
+            <FormItem className="grid sm:grid-cols-[1fr_16rem] border-b mb-6">
               <div>
                 <FormLabel className="text-base">{t("language")}</FormLabel>
                 <FormDescription>{t("languageDescription")}</FormDescription>
               </div>
-              <FormControl>
+              <FormControl className="mt-2">
                 <Select
                   key={field.value}
                   value={field.value}
@@ -132,12 +132,12 @@ export function Account() {
           )}
         />
 
-        <FormItem className="grid grid-cols-[1fr_16rem] border-b mb-6">
+        <FormItem className="grid sm:grid-cols-[1fr_16rem] border-b mb-6">
           <div>
             <FormLabel className="text-base">{t("email")}</FormLabel>
             <FormDescription>{t("emailDescription")}</FormDescription>
           </div>
-          <FormControl>
+          <FormControl className="mt-2">
             <Input readOnly value={sessionData?.user?.email ?? ""} />
           </FormControl>
           <div />

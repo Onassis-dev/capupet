@@ -98,12 +98,12 @@ export function Organization() {
   return (
     <Form {...orgForm}>
       <form onSubmit={submit} className="space-y-4">
-        <FormItem className="grid grid-cols-[1fr_16rem] border-b mb-6">
+        <FormItem className="grid sm:grid-cols-[1fr_16rem] border-b mb-6">
           <div>
             <FormLabel className="text-base">{t("logo")}</FormLabel>
             <FormDescription>{t("logoDescription")}</FormDescription>
           </div>
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center justify-between gap-2 mt-2 sm:m-0">
             <button
               type="button"
               className="aspect-square rounded-xl border size-24 overflow-hidden"
@@ -157,12 +157,12 @@ export function Organization() {
           control={orgForm.control}
           name="name"
           render={({ field }) => (
-            <FormItem className="grid grid-cols-[1fr_16rem] border-b mb-6">
+            <FormItem className="grid sm:grid-cols-[1fr_16rem] border-b mb-6">
               <div>
                 <FormLabel className="text-base">{t("name")}</FormLabel>
                 <FormDescription>{t("nameDescription")}</FormDescription>
               </div>
-              <FormControl>
+              <FormControl className="mt-2">
                 <Input value={field.value ?? ""} onChange={field.onChange} />
               </FormControl>
               <div></div>

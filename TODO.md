@@ -10,9 +10,7 @@ TODO
   - Delete account
   - Add captcha
   - Improve emails
-  - Fix error messages
   - Add extra info to pet
   - Add filters to tables
-  - Separate tailwind bundles
 
 - DEPLOYMENT

@@ -1,25 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@source "../../../apps/**/*.{ts,tsx}";
-@source "../../../components/**/*.{ts,tsx}";
-@source "../**/*.{ts,tsx}";
-
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --color-azure-radiance-50: hsl(206, 94%, 97%);
-  --color-azure-radiance-100: hsl(208, 94%, 93%);
-  --color-azure-radiance-200: hsl(208, 94%, 87%);
-  --color-azure-radiance-300: hsl(206, 94%, 78%);
-  --color-azure-radiance-400: hsl(207, 92%, 68%);
-  --color-azure-radiance-500: hsl(211, 88%, 60%);
-  --color-azure-radiance-600: hsl(215, 90%, 55%);
-  --color-azure-radiance-700: hsl(219, 73%, 48%);
-  --color-azure-radiance-800: hsl(220, 68%, 40%);
-  --color-azure-radiance-900: hsl(219, 61%, 33%);
-  --color-azure-radiance-950: hsl(221, 53%, 21%);
-
   --color-crusta-50: #fff6ed;
   --color-crusta-100: #ffebd5;
   --color-crusta-200: #fdd2ab;
@@ -32,17 +16,7 @@
   --color-crusta-900: #7b2813;
   --color-crusta-950: #421108;
 
-  --color-cinnabar-50: #fff1f1;
-  --color-cinnabar-100: #ffe1e1;
-  --color-cinnabar-200: #ffc7c7;
-  --color-cinnabar-300: #ffa1a1;
-  --color-cinnabar-400: #ff6a6a;
   --color-cinnabar-500: #f72b2b; /* https://uicolors.app/generate/f72b2b */
-  --color-cinnabar-600: #e51d1d;
-  --color-cinnabar-700: #c11414;
-  --color-cinnabar-800: #9f1515;
-  --color-cinnabar-900: #841818;
-  --color-cinnabar-950: #480707;
 }
 
 :root {
@@ -74,50 +48,6 @@
   --sidebar-accent: #eeeeee;
 
   --radius: 0.5rem;
-
-  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-sm:
-    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-  --shadow-md:
-    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
-  --shadow-lg:
-    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
-  --shadow-xl:
-    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
-  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
-}
-
-.dark {
-  --background: hsl(0 0% 7%);
-  --foreground: hsl(0 0% 93%);
-  --card: hsl(0 0% 9%);
-  --card-foreground: hsl(0 0% 93%);
-  --primary: hsl(30 91% 87%);
-  --primary-foreground: hsl(184 44% 7%);
-  --secondary: hsl(30 18% 19%);
-  --secondary-foreground: hsl(30 91% 87%);
-  --muted: hsl(0 0% 13%);
-  --muted-foreground: hsl(0 0% 71%);
-  --accent: hsl(0 0% 17%);
-  --accent-foreground: hsl(0 0% 93%);
-  --destructive: hsl(10 77% 55%);
-  --border: hsl(43 12% 90%);
-  --input: hsl(0 0% 28%);
-  --ring: hsl(30 91% 87%);
-  --chart-1: hsl(30 91% 87%);
-  --chart-2: hsl(30 18% 19%);
-  --chart-3: hsl(0 0% 17%);
-  --chart-4: hsl(30 16% 22%);
-  --chart-5: hsl(30 91% 87%);
-  --sidebar: hsl(240 9% 10%);
-  --sidebar-foreground: hsl(0 0% 96%);
-  --sidebar-primary: hsl(224 77% 48%);
-  --sidebar-primary-foreground: hsl(0 0% 100%);
-  --sidebar-accent: hsl(240 6% 16%);
-  --sidebar-border: hsl(240 6% 16%);
-  --sidebar-ring: hsl(240 10% 84%);
 
   --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
