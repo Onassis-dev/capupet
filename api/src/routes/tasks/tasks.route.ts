@@ -59,9 +59,7 @@ export const tasksRoute = new Hono<{ Variables: Variables }>()
 
     await db
       .update(tasks)
-      .set({
-        ...data,
-      })
+      .set(data)
       .where(
         and(eq(tasks.id, data.id), eq(tasks.organizationId, c.get("orgId")))
       );

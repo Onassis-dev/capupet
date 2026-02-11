@@ -7,6 +7,7 @@ import {
   Settings,
   Slice,
   Syringe,
+  UserCog,
   Users,
 } from "lucide-react";
 import {
@@ -51,6 +52,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     website: {
       es: "Sitio web",
       en: "Website",
+    },
+    users: {
+      es: "Usuarios",
+      en: "Users",
     },
     settings: {
       es: "Configuración",
@@ -147,6 +152,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           )}
         </SidebarMenu>
         <SidebarMenu className="mt-auto">
+          {session?.user?.users && (
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                asChild
+                isActive={isActive(location, "permissions")}
+              >
+                <Link to="/permissions">
+                  <UserCog className="size-5!" strokeWidth={1.8} />
+                  <span>{t("users")}</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          )}
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild

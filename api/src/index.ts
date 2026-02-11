@@ -14,6 +14,7 @@ import { filesRoute } from "./routes/files/files.route";
 import { vaccinesRoute } from "./routes/vaccines/vaccines.route";
 import { proceduresRoute } from "./routes/procedures/procedures.route";
 import { medicalRoute } from "./routes/medical/medical.route";
+import { permissionsRoute } from "./routes/permissions/permissions.route";
 
 export type Variables = {
   userId: string;
@@ -50,7 +51,8 @@ const app = new Hono<{ Variables: Variables }>()
   .route("/public", publicRoute)
   .route("/notes", notesRoute)
   .route("/files", filesRoute)
-  .route("/medical", medicalRoute);
+  .route("/medical", medicalRoute)
+  .route("/permissions", permissionsRoute);
 
 export default app;
 

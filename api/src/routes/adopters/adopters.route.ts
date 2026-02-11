@@ -59,9 +59,7 @@ export const adoptersRoute = new Hono<{ Variables: Variables }>()
 
     await db
       .update(adopters)
-      .set({
-        ...data,
-      })
+      .set(data)
       .where(
         and(
           eq(adopters.id, data.id),

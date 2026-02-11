@@ -62,9 +62,7 @@ export const proceduresRoute = new Hono<{ Variables: Variables }>()
 
     await db
       .update(medicalOptions)
-      .set({
-        ...data,
-      })
+      .set(data)
       .where(
         and(
           eq(medicalOptions.id, data.id),

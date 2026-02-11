@@ -204,6 +204,13 @@
       "when": 1770672931430,
       "tag": "0028_red_forge",
       "breakpoints": true
+    },
+    {
+      "idx": 29,
+      "version": "7",
+      "when": 1770780593454,
+      "tag": "0029_sturdy_sumo",
+      "breakpoints": true
     }
   ]
 }

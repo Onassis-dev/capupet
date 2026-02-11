@@ -66,14 +66,9 @@ export const medicalRoute = new Hono<{ Variables: Variables }>()
       );
     if (!pet) return c.json({ error: "Pet not found" }, 404);
 
-    const [row] = await db
-      .insert(medical)
-      .values({
-        ...data,
-      })
-      .returning({
-        id: medical.id,
-      });
+    const [row] = await db.insert(medical).values(data).returning({
+      id: medical.id,
+    });
 
     return c.json(row);
   })
@@ -83,9 +78,7 @@ export const medicalRoute = new Hono<{ Variables: Variables }>()
 
     await db
       .update(medical)
-      .set({
-        ...data,
-      })
+      .set(data)
       .where(
         and(
           eq(medical.id, data.id),

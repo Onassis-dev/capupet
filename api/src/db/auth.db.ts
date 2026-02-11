@@ -1,5 +1,5 @@
 import { SQL, sql } from "drizzle-orm";
-import { serial, integer } from "drizzle-orm/pg-core";
+import { serial, integer, uuid } from "drizzle-orm/pg-core";
 import {
   pgTable,
   text,
@@ -97,8 +97,6 @@ export const permissionsList = {
   adopters: boolean().default(false).notNull(),
   tasks: boolean().default(false).notNull(),
   website: boolean().default(false).notNull(),
-  inventory: boolean().default(false).notNull(),
-  finances: boolean().default(false).notNull(),
 };
 
 export type Permission = keyof typeof permissionsList;
@@ -107,10 +105,12 @@ export const permissions = pgTable(
   "permissions",
   {
     id: serial().primaryKey().notNull(),
-    userId: text()
-      .notNull()
-      .references((): AnyPgColumn => users.id, { onDelete: "cascade" }),
+    userId: text().references((): AnyPgColumn => users.id, {
+      onDelete: "cascade",
+    }),
+    invitation: uuid().unique(),
     organizationId,
+    createdAt: timestamp().notNull().defaultNow(),
     ...permissionsList,
   },
 

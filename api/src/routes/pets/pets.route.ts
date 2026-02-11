@@ -124,9 +124,7 @@ export const petsRoute = new Hono<{ Variables: Variables }>()
     const data = c.req.valid("json");
     await db
       .update(pets)
-      .set({
-        ...data,
-      })
+      .set(data)
       .where(
         and(eq(pets.id, data.id), eq(pets.organizationId, c.get("orgId")))
       );
@@ -137,9 +135,7 @@ export const petsRoute = new Hono<{ Variables: Variables }>()
     const data = c.req.valid("json");
     await db
       .update(pets)
-      .set({
-        ...data,
-      })
+      .set(data)
       .where(
         and(eq(pets.id, data.id), eq(pets.organizationId, c.get("orgId")))
       );

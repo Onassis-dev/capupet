@@ -42,9 +42,7 @@ export const websitesRoute = new Hono<{ Variables: Variables }>()
 
     await db
       .update(websites)
-      .set({
-        ...data,
-      })
+      .set(data)
       .where(eq(websites.organizationId, c.get("orgId")));
 
     return c.json({});
