@@ -1,3 +1,4 @@
+import Share from "@/components/Share";
 import { useI18n } from "@/hooks/use-i18n";
 import {
   Dialog,
@@ -7,6 +8,8 @@ import {
   DialogDescription,
 } from "@workspace/ui/components/ui/dialog";
 import { Input } from "@workspace/ui/components/ui/input";
+import { Button } from "@workspace/ui/components/ui/button";
+import { Share2Icon } from "lucide-react";
 
 interface props {
   permission?: any;
@@ -21,8 +24,8 @@ export const SharePermission = ({ permission, open, setOpen }: props) => {
       en: "Share invitation",
     },
     text: {
-      es: "Comparte el link de la invitación con la persona que quieres anadir a tu iglesia.",
-      en: "Share the invitation link with the person you want to add to your church.",
+      es: "Comparte el link de la invitación con la persona que quieres añadir a tu organización.",
+      en: "Share the invitation link with the person you want to add to your organization.",
     },
     share: {
       es: "Compartir",
@@ -47,15 +50,15 @@ export const SharePermission = ({ permission, open, setOpen }: props) => {
             className="text-sm"
           />
 
-          {/* <Share
-            url={`${import.meta.env.VITE_APP_ORIGIN!}/invitation/${invitation?.invitation}`}
-            title="Unete a nuestra iglesia!"
+          <Share
+            url={`${window.location.origin}/invitation/${permission?.invitation}`}
+            title={t("title")}
           >
             <Button variant="outline" size="sm" className="shrink-0 gap-1.5">
               <Share2Icon className="size-4 cursor-pointer" />
               {t("share")}
             </Button>
-          </Share> */}
+          </Share>
         </div>
       </DialogContent>
     </Dialog>

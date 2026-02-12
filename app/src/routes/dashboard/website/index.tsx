@@ -1,3 +1,4 @@
+import { session } from "@/hooks/use-session";
 import {
   Form,
   FormField,
@@ -41,7 +42,7 @@ import { Button } from "@workspace/ui/components/ui/button";
 import {
   GlobeIcon,
   PencilIcon,
-  ShareIcon,
+  Share2Icon,
   SquareArrowOutUpRightIcon,
 } from "lucide-react";
 import {
@@ -52,6 +53,7 @@ import {
 import { MailIcon } from "lucide-react";
 import PhoneInput from "@/components/phone-input";
 import { Input } from "@workspace/ui/components/ui/input";
+import Share from "@/components/Share";
 
 type Website = z.infer<typeof websiteSchema>;
 
@@ -195,10 +197,15 @@ export default function WebsitePage() {
                 <PencilIcon className="size-4" />
                 {t("edit")}
               </Button>
-              <Button variant="secondary">
-                <ShareIcon className="size-4" />
-                {t("share")}
-              </Button>
+              <Share
+                url={`${data?.slug}.capu.pet`}
+                title={session?.user?.orgName || ""}
+              >
+                <Button variant="secondary">
+                  <Share2Icon className="size-4" />
+                  {t("share")}
+                </Button>
+              </Share>
             </div>
           </FormItem>
 
