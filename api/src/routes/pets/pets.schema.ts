@@ -32,6 +32,8 @@ export const petGeneralInfoSchema = z.object({
   measurement: z.enum(measurementsArray).nullish(),
   comments: z.string().nullish(),
   status: z.enum(statusArray),
+  microchip: z.string().nullish(),
+  adopterId: z.string().or(z.number()).nullish(),
 });
 
 export const publicPetSchema = z.object({

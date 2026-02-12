@@ -15,6 +15,7 @@ import { pets } from "../../db/pets.db";
 import { deleteSchema } from "../../lib/schemas";
 import { handleImage } from "../../lib/files";
 import { s3 } from "../../lib/s3";
+import { adopters } from "../../db/adopters.db";
 
 export const petsRoute = new Hono<{ Variables: Variables }>()
   .use(checkPermission("pets"))
@@ -48,6 +49,16 @@ export const petsRoute = new Hono<{ Variables: Variables }>()
       rows,
       count: rows[0]?.count || 0,
     });
+  })
+
+  .get("/adopters", async (c) => {
+    const rows = await db
+      .select({ id: adopters.id, name: adopters.name })
+      .from(adopters)
+      .where(eq(adopters.organizationId, c.get("orgId")))
+      .orderBy(desc(adopters.id));
+
+    return c.json(rows);
   })
 
   .post("/image", validator("form", uploadPetImageSchema), async (c) => {

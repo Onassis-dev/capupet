@@ -6,9 +6,11 @@ import {
   pgEnum,
   date,
   boolean,
+  integer,
 } from "drizzle-orm/pg-core";
 import { organizationId } from "./auth.db";
 import { sql, SQL } from "drizzle-orm";
+import { adopters } from "./adopters.db";
 
 export const speciesArray = ["dog", "cat", "other"] as const;
 export const sexesArray = ["male", "female", "unknown"] as const;
@@ -42,6 +44,8 @@ export const pets = pgTable("pets", {
   bornDate: date(),
   public: boolean().notNull().default(true),
   image: varchar(),
+  microchip: varchar(),
+  adopterId: integer().references(() => adopters.id, { onDelete: "restrict" }),
   fts: varchar().generatedAlwaysAs((): SQL => sql`concat_fts(${pets.name})`),
   organizationId,
 });

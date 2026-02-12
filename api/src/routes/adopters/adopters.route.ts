@@ -12,6 +12,7 @@ import {
 } from "./adopters.schema";
 import { adopters } from "../../db/adopters.db";
 import { deleteSchema } from "../../lib/schemas";
+import { sendError } from "../../lib/errors";
 
 export const adoptersRoute = new Hono<{ Variables: Variables }>()
   .use(checkPermission("adopters"))
@@ -73,14 +74,19 @@ export const adoptersRoute = new Hono<{ Variables: Variables }>()
   .delete("/", validator("json", deleteSchema), async (c) => {
     const data = c.req.valid("json");
 
-    await db
-      .delete(adopters)
-      .where(
-        and(
-          eq(adopters.id, data.id),
-          eq(adopters.organizationId, c.get("orgId"))
-        )
-      );
+    try {
+      await db
+        .delete(adopters)
+        .where(
+          and(
+            eq(adopters.id, data.id),
+            eq(adopters.organizationId, c.get("orgId"))
+          )
+        );
+    } catch (error: any) {
+      if (error?.cause?.constraint) return sendError(c, "existingDependencies");
+      else throw error;
+    }
 
     return c.json({});
   });

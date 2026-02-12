@@ -191,7 +191,7 @@ export const PublicInfo = ({ data }: { data: PetGeneralInfo }) => {
             )}
           />
 
-          <div className="col-span-full sticky bottom-28">
+          <div className="col-span-full sticky bottom-28 md:bottom-4">
             <SubmitButton className="w-full sm:w-auto" disabled={isPending}>
               {t("saveChanges")}
             </SubmitButton>

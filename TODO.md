@@ -3,7 +3,6 @@ TODO
 - Functionality
   - Update tasks tab
   - Implement a dashboard
-  - # Add extra info to pet
 
 - Extra
   - Delete organization

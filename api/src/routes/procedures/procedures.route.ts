@@ -86,11 +86,7 @@ export const proceduresRoute = new Hono<{ Variables: Variables }>()
           )
         );
     } catch (error: any) {
-      if (
-        error?.cause?.constraint ===
-        "medical_medicalOptionId_medicalOptions_id_fk"
-      )
-        return sendError(c, "existingDependencies");
+      if (error?.cause?.constraint) return sendError(c, "existingDependencies");
       else throw error;
     }
 

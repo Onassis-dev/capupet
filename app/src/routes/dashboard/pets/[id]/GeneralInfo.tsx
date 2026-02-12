@@ -1,5 +1,5 @@
 import { api, get } from "@/lib/api";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import {
   Form,
   FormField,
@@ -17,6 +17,8 @@ import { useI18n, useLanguage } from "@/hooks/use-i18n";
 import { Input } from "@workspace/ui/components/ui/input";
 import {
   Select,
+  SelectContent,
+  SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@workspace/ui/components/ui/select";
@@ -76,6 +78,10 @@ export const GeneralInfo = ({ data }: { data: PetGeneralInfo }) => {
       es: "Comentarios",
       en: "Comments",
     },
+    adopter: {
+      es: "Adoptante",
+      en: "Adopter",
+    },
     status: {
       es: "Estado",
       en: "Status",
@@ -87,6 +93,11 @@ export const GeneralInfo = ({ data }: { data: PetGeneralInfo }) => {
   });
   const client = useQueryClient();
   const initiated = useRef(false);
+
+  const { data: adopters } = useQuery({
+    queryKey: ["adopters", "list"],
+    queryFn: () => get(api.pets.adopters.$get()),
+  });
 
   const petsForm = useForm<z.infer<typeof petGeneralInfoSchema>>({
     resolver: zodResolver(petGeneralInfoSchema),
@@ -101,7 +112,9 @@ export const GeneralInfo = ({ data }: { data: PetGeneralInfo }) => {
       weight: undefined,
       measurement: undefined,
       comments: undefined,
+      microchip: undefined,
       status: undefined,
+      adopterId: undefined,
     },
   });
 
@@ -131,19 +144,6 @@ export const GeneralInfo = ({ data }: { data: PetGeneralInfo }) => {
       <form onSubmit={submit} className="grid sm:grid-cols-2 gap-x-4 gap-y-1">
         <FormField
           control={petsForm.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("name")}</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={petsForm.control}
           name="status"
           render={({ field }) => (
             <FormItem>
@@ -160,6 +160,56 @@ export const GeneralInfo = ({ data }: { data: PetGeneralInfo }) => {
                 </FormControl>
                 <StatusOptions />
               </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {petsForm.watch("status") === "adopted" ? (
+          <FormField
+            control={petsForm.control}
+            name="adopterId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("adopter")}</FormLabel>
+                <Select
+                  key={field.value}
+                  onValueChange={field.onChange}
+                  value={field.value?.toString() ?? ""}
+                >
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {adopters?.map((adopter) => (
+                      <SelectItem
+                        key={adopter.id}
+                        value={adopter.id.toString()}
+                      >
+                        {adopter.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        ) : (
+          <div></div>
+        )}
+
+        <FormField
+          control={petsForm.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("name")}</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
@@ -299,6 +349,19 @@ export const GeneralInfo = ({ data }: { data: PetGeneralInfo }) => {
         </div>
         <FormField
           control={petsForm.control}
+          name="microchip"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Microchip</FormLabel>
+              <FormControl>
+                <Input value={field.value ?? ""} onChange={field.onChange} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={petsForm.control}
           name="comments"
           render={({ field }) => (
             <FormItem className="col-span-full">
@@ -316,7 +379,7 @@ export const GeneralInfo = ({ data }: { data: PetGeneralInfo }) => {
           )}
         />
 
-        <div className="col-span-full sticky bottom-28">
+        <div className="col-span-full sticky bottom-28 md:bottom-4">
           <SubmitButton className="w-full sm:w-auto" disabled={isPending}>
             {t("saveChanges")}
           </SubmitButton>

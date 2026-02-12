@@ -171,7 +171,7 @@ export function Organization() {
           )}
         />
 
-        <div className="pt-4 sticky bottom-28">
+        <div className="pt-4 sticky bottom-28 md:bottom-4">
           <SubmitButton className="w-full sm:w-auto" disabled={isPending}>
             {t("save")}
           </SubmitButton>
