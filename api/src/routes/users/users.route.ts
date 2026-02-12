@@ -6,7 +6,11 @@ import { and, eq, getTableColumns, sql } from "drizzle-orm";
 import { permissions } from "../../db/auth.db";
 import { users } from "../../db/auth.db";
 import { organizations } from "../../db/auth.db";
-import { updateOrgSchema, updateUserSchema } from "./user.schema";
+import {
+  updateOrgSchema,
+  updateUserSchema,
+  acceptInvitationSchema,
+} from "./user.schema";
 import { validator } from "../../middleware/validation.middleware";
 import { sendError } from "../../lib/errors";
 import { s3 } from "../../lib/s3";
@@ -74,6 +78,30 @@ export const usersRoute = new Hono<{ Variables: Variables }>()
       .update(users)
       .set({ permissionId: permission.id })
       .where(eq(users.id, c.get("userId")));
+
+    return c.json({});
+  })
+
+  .put("/invitation", validator("json", acceptInvitationSchema), async (c) => {
+    const data = c.req.valid("json");
+
+    await db.transaction(async (tx) => {
+      const [permission] = await tx
+        .update(permissions)
+        .set({ invitation: null, userId: c.get("userId") })
+        .where(eq(permissions.invitation, data.invitation))
+        .returning({ id: permissions.id });
+
+      if (!permission) {
+        tx.rollback();
+        return sendError(c, "invalidInvitation");
+      }
+
+      await tx
+        .update(users)
+        .set({ permissionId: permission.id })
+        .where(eq(users.id, c.get("userId")));
+    });
 
     return c.json({});
   })

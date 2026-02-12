@@ -13,6 +13,7 @@ import { useI18n } from "@/hooks/use-i18n";
 import { PermissionsForm } from "./PermissionsForm";
 import { PageWrapper } from "@/components/PageWrapper";
 import { Badge } from "@workspace/ui/components/ui/badge";
+import { SharePermission } from "./SharePermission";
 
 export default function PermissionsPage() {
   const t = useI18n({
@@ -33,8 +34,8 @@ export default function PermissionsPage() {
       en: "Are you sure you want to delete this permission?",
     },
     pageTitle: {
-      es: "Permisos",
-      en: "Permissions",
+      es: "Usuarios",
+      en: "Users",
     },
     invitation: {
       es: "Invitación",
@@ -47,6 +48,7 @@ export default function PermissionsPage() {
   const { selectedRow, setSelectedRow } = useSelectedRow();
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const [openShare, setOpenShare] = useState(false);
 
   const { data, status } = useQuery({
     queryKey: ["permissions", debouncedFilter, page],
@@ -72,6 +74,12 @@ export default function PermissionsPage() {
           setSelectedPermission={setSelectedRow}
           permission={selectedRow}
         />
+
+        <SharePermission
+          open={openShare}
+          setOpen={setOpenShare}
+          permission={selectedRow}
+        />
       </OptionsGrid>
 
       <CrudTable
@@ -90,8 +98,13 @@ export default function PermissionsPage() {
         setOpenDelete={setOpenDelete}
         setOpenEdit={setOpenEdit}
         onRowClick={(row) => {
-          setSelectedRow(row);
-          setOpenEdit(true);
+          if (row.name) {
+            setSelectedRow(row);
+            setOpenEdit(true);
+          } else {
+            setSelectedRow(row);
+            setOpenShare(true);
+          }
         }}
       />
 

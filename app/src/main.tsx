@@ -31,6 +31,7 @@ import SettingsPage from "./routes/dashboard/settings/index";
 import VaccinesPage from "./routes/dashboard/vaccines/index";
 import ProceduresPage from "./routes/dashboard/procedures/index";
 import PermissionsPage from "./routes/dashboard/permissions/index";
+import InvitationPage from "./routes/auth/invitation";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -47,6 +48,7 @@ createRoot(document.getElementById("root")!).render(
               <Route path="/verify-email" element={<VerifyEmailPage />} />
               <Route path="/onboarding" element={<OnboardingPage />} />
               <Route path="/offline" element={<OfflinePage />} />
+              <Route path="/invitation/:id" element={<InvitationPage />} />
             </Route>
 
             {/* Dashboard routes */}

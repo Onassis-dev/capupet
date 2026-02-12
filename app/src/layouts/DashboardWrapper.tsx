@@ -15,6 +15,7 @@ export function DashboardWrapper({ children }: { children: React.ReactNode }) {
       return;
     }
 
+    console.log(session);
     if (!session?.user?.verified) {
       navigate("/verify-email");
       return;

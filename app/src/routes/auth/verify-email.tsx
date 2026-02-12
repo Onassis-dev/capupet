@@ -44,6 +44,7 @@ export default function VerifyEmailPage() {
   });
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect") || "/";
+
   const navigate = useNavigate();
   const [cooldown, setCooldown] = useState(0);
 
@@ -122,7 +123,7 @@ export default function VerifyEmailPage() {
         </CardContent>
       </Card>
       <Button asChild className="w-64 mt-4 mx-auto" variant="ghost">
-        <Link to="/signin">{t("backToLogin")}</Link>
+        <Link to={"/signin" + window.location.search}>{t("backToLogin")}</Link>
       </Button>
     </div>
   );

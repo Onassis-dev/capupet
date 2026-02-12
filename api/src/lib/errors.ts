@@ -26,6 +26,26 @@ const errorList = {
     es: "Para eliminar el registro, primero debe eliminar los registros asociados",
     en: "To delete the record, you must first delete the associated records",
   },
+  invalidInvitation: {
+    es: "Invitación inválida",
+    en: "Invalid invitation",
+  },
+  cannotDeleteOwner: {
+    es: "No puedes eliminar el dueño de la organización",
+    en: "You cannot delete the owner of the organization",
+  },
+  cannotDeleteSelf: {
+    es: "No puedes eliminar tu propio usuario",
+    en: "You cannot delete your own permission",
+  },
+  cannotEditOwner: {
+    es: "No puedes editar el dueño de la organización",
+    en: "You cannot edit the owner of the organization",
+  },
+  cannotEditSelf: {
+    es: "No puedes editar tu propio usuario",
+    en: "You cannot edit your own permission",
+  },
 } as const;
 
 export function sendError(

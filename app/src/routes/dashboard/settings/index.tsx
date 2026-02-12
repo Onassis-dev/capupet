@@ -8,7 +8,6 @@ import { useI18n } from "@/hooks/use-i18n";
 import { PageWrapper } from "@/components/PageWrapper";
 import { Organization } from "./Organization";
 import { Account } from "./Account";
-import { Users } from "./Users";
 
 export default function SettingsPage() {
   const t = useI18n({
@@ -40,9 +39,6 @@ export default function SettingsPage() {
           <TabsTrigger value="account" className="max-w-32">
             {t("account")}
           </TabsTrigger>
-          <TabsTrigger value="users" className="max-w-32">
-            {t("users")}
-          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="org">
@@ -51,10 +47,6 @@ export default function SettingsPage() {
 
         <TabsContent value="account">
           <Account />
-        </TabsContent>
-
-        <TabsContent value="users">
-          <Users />
         </TabsContent>
       </Tabs>
     </PageWrapper>

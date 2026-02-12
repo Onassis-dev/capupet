@@ -16,7 +16,7 @@ import {
 import { Separator } from "@workspace/ui/components/ui/separator";
 import { useI18n, useLanguage } from "@/hooks/use-i18n";
 import { authClient } from "@/lib/auth-client";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useSearchParams } from "react-router";
 import { useRegisterSchema } from "./auth.models";
 import { Input } from "@workspace/ui/components/ui/input";
 import PasswordInput from "@/components/password-input";
@@ -80,6 +80,8 @@ export default function SignUpPage() {
   });
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get("redirect") || "/";
 
   const handleSignup = async (values: {
     email: string;
@@ -90,7 +92,8 @@ export default function SignUpPage() {
       email: values.email,
       password: values.password,
       name: values.username,
-      callbackURL: window.location.origin + "/verify-email",
+      callbackURL:
+        window.location.origin + "/verify-email?redirect=" + redirect,
       lang: language,
       theme: "light",
     });
@@ -100,7 +103,7 @@ export default function SignUpPage() {
         return showError(t("emailInUse"));
       return showError(error.message);
     }
-    navigate("/verify-email");
+    navigate("/verify-email" + window.location.search);
   };
 
   const { mutate, isPending } = useMutation({
@@ -123,7 +126,7 @@ export default function SignUpPage() {
               onClick={async () => {
                 await authClient.signIn.social({
                   provider: "google",
-                  callbackURL: window.location.origin + "/",
+                  callbackURL: window.location.origin + redirect,
                 });
               }}
             >
@@ -184,7 +187,10 @@ export default function SignUpPage() {
 
       <p className="text-center mt-6">
         {t("haveAccount")}{" "}
-        <Link to="/signin" className="text-orange-500">
+        <Link
+          to={"/signin" + window.location.search}
+          className="text-orange-500"
+        >
           {t("signIn")}
         </Link>
       </p>

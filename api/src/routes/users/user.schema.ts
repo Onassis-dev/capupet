@@ -10,5 +10,5 @@ export const updateUserSchema = z.object({
 });
 
 export const acceptInvitationSchema = z.object({
-  invitation: z.uuid(),
+  invitation: z.string(),
 });

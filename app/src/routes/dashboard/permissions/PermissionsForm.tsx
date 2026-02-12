@@ -40,21 +40,17 @@ export const PermissionsForm = ({
   const client = useQueryClient();
 
   const t = useI18n({
-    registerPermission: {
-      es: "Registrar permiso",
-      en: "Register permission",
+    user: {
+      es: "Usuario",
+      en: "User",
     },
-    editPermission: {
-      es: "Editar permiso",
-      en: "Edit permission",
+    registerUser: {
+      es: "Registrar usuario",
+      en: "Register user",
     },
-    name: {
-      es: "Nombre",
-      en: "Name",
-    },
-    email: {
-      es: "Correo",
-      en: "Email",
+    editUser: {
+      es: "Editar usuario",
+      en: "Edit user",
     },
     users: {
       es: "Usuarios",
@@ -124,26 +120,14 @@ export const PermissionsForm = ({
     <ModalForm
       open={open}
       setOpen={setOpen}
-      title={permission ? t("editPermission") : t("registerPermission")}
-      trigger={t("registerPermission")}
+      title={permission ? t("editUser") : t("registerUser")}
+      trigger={t("registerUser")}
       submit={submit}
       isPending={isPending}
       reset={() => setSelectedPermission(null)}
     >
-      {permission?.name ? (
-        <div className="space-y-2 mb-4">
-          <div>
-            <span className="text-sm text-muted-foreground">{t("name")}</span>
-            <p className="text-sm font-medium">{String(permission.name)}</p>
-          </div>
-          <div>
-            <span className="text-sm text-muted-foreground">{t("email")}</span>
-            <p className="text-sm font-medium">{String(permission.email)}</p>
-          </div>
-        </div>
-      ) : null}
       <Form {...permissionsForm}>
-        <form onSubmit={submit} className="space-y-4 mb-6">
+        <form onSubmit={submit} className="space-y-4 mb-4">
           {fields.map((field) => (
             <FormField
               key={field}
@@ -161,6 +145,15 @@ export const PermissionsForm = ({
           ))}
         </form>
       </Form>
+
+      {permission?.name ? (
+        <div className="space-y-2 mb-4 border-t pt-4">
+          <div>
+            <p className="text-sm font-bold">{String(permission.name)}</p>
+            <p className="text-sm">{String(permission.email)}</p>
+          </div>
+        </div>
+      ) : null}
     </ModalForm>
   );
 };

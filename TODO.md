@@ -1,16 +1,18 @@
 TODO
 
-- Settings
-  - # Users page
-
-- Extra
+- Functionality
   - Update tasks tab
   - Implement a dashboard
+  - # Add share component
+  - # Add extra info to pet
+
+- Extra
   - Delete organization
   - Delete account
   - Add captcha
   - Improve emails
-  - Add extra info to pet
   - Add filters to tables
+  - Add pwa functionality
 
 - DEPLOYMENT
+- DESIGN FIXES

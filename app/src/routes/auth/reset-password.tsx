@@ -103,13 +103,19 @@ export default function ResetPasswordPage() {
       <div className="w-full max-w-sm mt-12 sm:mt-32 flex flex-col items-center gap-4">
         <CardTitle className="text-center">{t("invalidToken")}</CardTitle>
         <Button asChild className="w-64">
-          <Link to="/forgot-password" className="text-orange-500">
+          <Link
+            to={"/forgot-password" + window.location.search}
+            className="text-orange-500"
+          >
             {t("requestNewLink")}
           </Link>
         </Button>
         <div className="text-sm text-center space-y-2">
           <Button asChild className="w-64" variant="ghost">
-            <Link to="/signin" className="text-orange-500">
+            <Link
+              to={"/signin" + window.location.search}
+              className="text-orange-500"
+            >
               {t("backToLogin")}
             </Link>
           </Button>
@@ -162,7 +168,7 @@ export default function ResetPasswordPage() {
       </Card>
       <div className="text-sm text-center mt-6 space-y-2">
         <p>
-          <Link to="/signin" className="text-blue">
+          <Link to={"/signin" + window.location.search} className="text-blue">
             {t("backToLogin")}
           </Link>
         </p>

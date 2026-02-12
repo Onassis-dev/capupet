@@ -116,13 +116,19 @@ export default function ForgotPasswordPage() {
       <div className="text-center mt-6 space-y-2">
         <p>
           {t("rememberPassword")}{" "}
-          <Link to="/signin" className="text-orange-500">
+          <Link
+            to={"/signin" + window.location.search}
+            className="text-orange-500"
+          >
             {t("login")}
           </Link>
         </p>
         <p>
           {t("noAccount")}{" "}
-          <Link to="/signup" className="text-orange-500">
+          <Link
+            to={"/signup" + window.location.search}
+            className="text-orange-500"
+          >
             {t("register")}
           </Link>
         </p>

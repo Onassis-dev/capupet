@@ -16,7 +16,7 @@ import {
 import { Separator } from "@workspace/ui/components/ui/separator";
 import { useI18n } from "@/hooks/use-i18n";
 import { authClient } from "@/lib/auth-client";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { Input } from "@workspace/ui/components/ui/input";
 import PasswordInput from "@/components/password-input";
 import { showError } from "@/lib/toast";
@@ -68,12 +68,15 @@ export default function SignInPage() {
     },
   });
 
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get("redirect") || "/";
+
   const { mutate, isPending } = useMutation({
     mutationFn: async (values: z.infer<typeof LoginSchema>) => {
       const { error } = await authClient.signIn.email({
         email: values.email,
         password: values.password,
-        callbackURL: window.location.origin + "/",
+        callbackURL: window.location.origin + redirect,
       });
 
       if (error) {
@@ -99,7 +102,7 @@ export default function SignInPage() {
             onClick={async () => {
               await authClient.signIn.social({
                 provider: "google",
-                callbackURL: window.location.origin + "/",
+                callbackURL: window.location.origin + redirect,
               });
             }}
           >
@@ -132,7 +135,7 @@ export default function SignInPage() {
                     <FormLabel className="w-full flex justify-between">
                       {t("password")}
                       <Link
-                        to="/forgot-password"
+                        to={"/forgot-password" + window.location.search}
                         className="cursor-pointer text-sm text-right font-medium"
                       >
                         {t("forgotPassword")}
@@ -152,9 +155,13 @@ export default function SignInPage() {
           </Form>
         </CardContent>
       </Card>
+
       <p className="text-center mt-6">
         {t("noAccount")}{" "}
-        <Link to="/signup" className="text-orange-500">
+        <Link
+          to={"/signup" + window.location.search}
+          className="text-orange-500"
+        >
           {t("register")}
         </Link>
       </p>
