@@ -28,20 +28,26 @@ import { Button } from "@workspace/ui/components/ui/button";
 
 interface props {
   columns: Column[];
-  rows: { id: number | string; [key: string]: unknown }[] | undefined;
+  rows: Row[] | undefined;
   status: QueryStatus;
   selectRow: Dispatch<SetStateAction<Record<string, unknown> | null>>;
   setOpenDelete?: Dispatch<SetStateAction<boolean>>;
   setOpenEdit?: Dispatch<SetStateAction<boolean>>;
-  onRowClick?: (row: { id: number | string; [key: string]: unknown }) => void;
+  onRowClick?: (row: Row) => void;
+}
+
+interface Row {
+  id: number | string;
+  [key: string]: unknown;
 }
 
 export interface Column {
   key: string;
   title: string;
   hide?: boolean;
-  transform?: (e: unknown) => unknown;
+  transform?: (e: unknown, row: Row) => unknown;
   icon?: boolean;
+  full?: boolean;
 }
 
 export const CrudTable = ({
@@ -107,7 +113,10 @@ export const CrudTable = ({
           <TableRow>
             {columns.map((column) => (
               <TableHead
-                className={column.hide ? "hidden sm:table-cell" : ""}
+                className={cn(
+                  column.hide ? "hidden sm:table-cell" : "",
+                  column.full ? "w-full" : ""
+                )}
                 key={column.key}
               >
                 {column.title}
@@ -137,7 +146,7 @@ export const CrudTable = ({
                     >
                       <span>
                         {column?.transform
-                          ? (column.transform(cellContent) as ReactNode)
+                          ? (column.transform(cellContent, row) as ReactNode)
                           : (cellContent as string)}
                       </span>
                     </TableCell>

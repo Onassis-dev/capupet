@@ -1,7 +1,7 @@
 TODO
 
 - Functionality
-  - Update tasks tab
+  - # Update tasks tab
   - Implement a dashboard
 
 - Extra

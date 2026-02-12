@@ -1,7 +1,7 @@
 import { useFilter } from "@/hooks/use-filter";
 import { usePagination } from "@/hooks/use-pagination";
 import { api, get } from "@/lib/api";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import PaginationMenu from "@/components/PaginationMenu";
 import { OptionsGrid } from "@workspace/ui/components/ui/grids";
 import { SearchInput } from "@/components/custom-inputs";
@@ -12,6 +12,15 @@ import DeleteDialog from "@/components/DeleteDialog";
 import { useI18n } from "@/hooks/use-i18n";
 import { TasksForm } from "./TasksForm";
 import { PageWrapper } from "@/components/PageWrapper";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@workspace/ui/components/ui/select";
+import { CheckIcon } from "lucide-react";
+import { cn } from "@workspace/ui/lib/utils";
 
 export default function TasksPage() {
   const t = useI18n({
@@ -42,23 +51,43 @@ export default function TasksPage() {
   const { selectedRow, setSelectedRow } = useSelectedRow();
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const [done, setDone] = useState("false");
+
+  const client = useQueryClient();
 
   const { data, status } = useQuery({
-    queryKey: ["tasks", debouncedFilter, page],
+    queryKey: ["tasks", debouncedFilter, page, done],
     queryFn: () =>
       get(
         api.tasks.$get({
-          query: { text: debouncedFilter, page: String(page) },
+          query: {
+            text: debouncedFilter,
+            page: String(page),
+            done,
+          },
         })
       ),
   });
+
   return (
     <PageWrapper title={t("pageTitle")} size="md">
       <OptionsGrid>
-        <SearchInput
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        />
+        <div className="flex items-center gap-2">
+          <SearchInput
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          />
+
+          <Select value={done} onValueChange={(value) => setDone(value)}>
+            <SelectTrigger>
+              <SelectValue placeholder="Estado" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="true">Completado</SelectItem>
+              <SelectItem value="false">Pendiente</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
 
         <TasksForm
           open={openEdit}
@@ -71,7 +100,36 @@ export default function TasksPage() {
       <CrudTable
         rows={data?.rows}
         status={status}
-        columns={[{ key: "title", title: t("title") }]}
+        columns={[
+          {
+            key: "done",
+            icon: true,
+            title: "",
+            transform: (done, row) => (
+              <button
+                className={cn(
+                  "size-5 rounded-full cursor-pointer border-2 flex items-center justify-center",
+                  done
+                    ? "bg-foreground text-background border-0"
+                    : "border-input"
+                )}
+                onClick={async (e) => {
+                  e.stopPropagation();
+
+                  await get(
+                    api.tasks.complete.$put({
+                      json: { id: Number(row.id), done: !done },
+                    })
+                  );
+                  client.invalidateQueries({ queryKey: ["tasks"] });
+                }}
+              >
+                {done ? <CheckIcon className="size-3" strokeWidth={3} /> : null}
+              </button>
+            ),
+          },
+          { key: "title", title: t("title"), full: true },
+        ]}
         selectRow={setSelectedRow}
         setOpenDelete={setOpenDelete}
         setOpenEdit={setOpenEdit}

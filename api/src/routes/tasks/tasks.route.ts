@@ -7,6 +7,7 @@ import { type Variables } from "../..";
 import { getTableColumns } from "drizzle-orm";
 import {
   createTaskSchema,
+  completeTaskSchema,
   searchTasksSchema,
   updateTaskSchema,
 } from "./tasks.schema";
@@ -28,6 +29,7 @@ export const tasksRoute = new Hono<{ Variables: Variables }>()
       .where(
         and(
           eq(tasks.organizationId, c.get("orgId")),
+          eq(tasks.done, data.done),
           data.text
             ? ilike(tasks.fts, `%${data.text.toLowerCase()}%`)
             : undefined
@@ -50,6 +52,19 @@ export const tasksRoute = new Hono<{ Variables: Variables }>()
       ...data,
       organizationId: c.get("orgId"),
     });
+
+    return c.json({});
+  })
+
+  .put("/complete", validator("json", completeTaskSchema), async (c) => {
+    const data = c.req.valid("json");
+
+    await db
+      .update(tasks)
+      .set({ done: data.done })
+      .where(
+        and(eq(tasks.id, data.id), eq(tasks.organizationId, c.get("orgId")))
+      );
 
     return c.json({});
   })
