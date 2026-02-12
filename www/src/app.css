@@ -1,0 +1,3 @@
+@import "@workspace/ui/globals.css";
+@source "../../ui/src/components/ui/button.tsx";
+@source "../../ui/src/components/ui/accordion.tsx";
