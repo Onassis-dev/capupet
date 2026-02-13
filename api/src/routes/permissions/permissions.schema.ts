@@ -1,5 +1,5 @@
 import { z } from "zod/v4";
-import { Permission } from "../../db/auth.db";
+import { type Permission } from "../../db/auth.db";
 
 export const selectPermissionsSchema = z.object({
   name: z.string().nullable(),

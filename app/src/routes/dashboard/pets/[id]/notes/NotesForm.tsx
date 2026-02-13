@@ -63,13 +63,17 @@ export const NotesForm = ({ note, open, setOpen, setSelectedNote }: props) => {
     ) {
       const content = values.content || null;
       if (note) {
-        await get(api.notes.$put({ json: { id: note.id, content } }));
+        await get(
+          api.notes.$put({ json: { id: note.id, content: content || "" } })
+        );
         client.setQueryData(["notes", id], (old: Record<string, unknown>[]) =>
           old.map((n) => (n.id === note.id ? { ...n, content } : n))
         );
       } else {
         const newNote = await get(
-          api.notes.$post({ json: { petId: Number(id), content } })
+          api.notes.$post({
+            json: { petId: Number(id), content: content || "" },
+          })
         );
         client.setQueryData(["notes", id], (old: Record<string, unknown>[]) => [
           { ...newNote, content },

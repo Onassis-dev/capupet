@@ -29,8 +29,6 @@ const defaultValues: z.infer<typeof taskSchema> = {
   id: 0,
   title: "",
   description: "",
-  due: "",
-  hour: "",
 };
 
 export const TasksForm = ({ task, open, setOpen, setSelectedTask }: props) => {

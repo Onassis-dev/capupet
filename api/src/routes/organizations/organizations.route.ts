@@ -24,8 +24,6 @@ export const organizationsRoute = new Hono<{ Variables: Variables }>()
       adopters: true,
       tasks: true,
       website: true,
-      inventory: true,
-      finances: true,
     };
 
     try {
