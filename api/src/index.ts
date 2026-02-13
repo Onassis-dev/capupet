@@ -23,23 +23,35 @@ export type Variables = {
   lang: "es" | "en";
 };
 
+const publicCors = cors({
+  origin: (origin) => (origin.endsWith(".capu.pet") ? origin : "*"),
+  allowHeaders: ["Content-Type"],
+  allowMethods: ["GET", "OPTIONS"],
+  exposeHeaders: ["Content-Length"],
+  maxAge: 600,
+  credentials: true,
+});
+
+const appCors = cors({
+  origin: process.env.APP_ORIGIN!,
+  allowHeaders: ["Content-Type", "Authorization"],
+  allowMethods: ["POST", "GET", "OPTIONS", "PUT", "DELETE"],
+  exposeHeaders: ["Content-Length", "X-ORG"],
+  maxAge: 600,
+  credentials: true,
+});
+
 const app = new Hono<{ Variables: Variables }>()
 
-  .use(
-    "*",
-    cors({
-      origin: [process.env.APP_ORIGIN!, process.env.PUBLIC_ORIGIN!],
-      allowHeaders: ["Content-Type", "Authorization"],
-      allowMethods: ["POST", "GET", "OPTIONS", "PUT", "DELETE"],
-      exposeHeaders: ["Content-Length", "X-ORG"],
-      maxAge: 600,
-      credentials: true,
-    })
+  .use("*", (c, next) =>
+    c.req.path.startsWith("/public") ? publicCors(c, next) : appCors(c, next)
   )
+
   .get("/health", (c) => c.text("ok"))
 
   .on(["POST", "GET"], "/api/auth/**", (c) => auth.handler(c.req.raw))
 
+  .route("/public", publicRoute)
   .route("/pets", petsRoute)
   .route("/images", imagesRoute)
   .route("/adopters", adoptersRoute)
@@ -49,7 +61,6 @@ const app = new Hono<{ Variables: Variables }>()
   .route("/users", usersRoute)
   .route("/organizations", organizationsRoute)
   .route("/websites", websitesRoute)
-  .route("/public", publicRoute)
   .route("/notes", notesRoute)
   .route("/files", filesRoute)
   .route("/medical", medicalRoute)

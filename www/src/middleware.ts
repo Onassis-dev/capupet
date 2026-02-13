@@ -6,7 +6,6 @@ export const onRequest = defineMiddleware((context, next) => {
 
   const host = context.request.headers.get("host");
   const pathname = context.url.pathname;
-  console.log("MIDDLEWARE: ", host, pathname);
 
   if (/\/ugc-(404|500)\/?$/.test(pathname)) return next(); // I don't like this
   if (pathname.startsWith("/ugc/")) return next("/404");
@@ -20,5 +19,5 @@ export const onRequest = defineMiddleware((context, next) => {
     return next(`/ugc/${subdomain}${pathname}`);
   }
 
-  return context.redirect(`https://capu.pet${pathname}`);
+  return context.redirect(`https://capupet.com${pathname}`);
 });
