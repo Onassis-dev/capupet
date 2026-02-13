@@ -20,6 +20,8 @@ const { slug, id } = Astro.params;
 
 let website: any;
 
+console.log("[ID]");
+
 try {
   const response = await fetch(
     `${API_ORIGIN}/public/pet?slug=${slug}&id=${id}`
