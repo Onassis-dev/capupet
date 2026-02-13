@@ -48,7 +48,7 @@ createRoot(document.getElementById("root")!).render(
               <Route path="/verify-email" element={<VerifyEmailPage />} />
               <Route path="/onboarding" element={<OnboardingPage />} />
               <Route path="/offline" element={<OfflinePage />} />
-              <Route path="/invitation/:id" element={<InvitationPage />} />
+              <Route path="/i/:id" element={<InvitationPage />} />
             </Route>
 
             {/* Dashboard routes */}

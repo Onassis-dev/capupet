@@ -99,12 +99,10 @@ export default function InvitationPage() {
       ) : (
         <div className="flex gap-2 justify-center mt-4">
           <Button size="sm" asChild>
-            <Link to={"/signup?redirect=/invitation/" + id}>
-              {t("createAccount")}
-            </Link>
+            <Link to={"/signup?redirect=/i/" + id}>{t("createAccount")}</Link>
           </Button>
           <Button variant="outline" size="sm" asChild>
-            <Link to={"/signin?redirect=/invitation/" + id}>{t("login")}</Link>
+            <Link to={"/signin?redirect=/i/" + id}>{t("login")}</Link>
           </Button>
         </div>
       )}

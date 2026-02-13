@@ -45,13 +45,13 @@ export const SharePermission = ({ permission, open, setOpen }: props) => {
 
         <div className="flex items-center space-x-2 mt-4">
           <Input
-            value={`${window.location.origin}/invitation/${permission?.invitation}`}
+            value={`${window.location.origin}/i/${permission?.invitation}`}
             readOnly
             className="text-sm"
           />
 
           <Share
-            url={`${window.location.origin}/invitation/${permission?.invitation}`}
+            url={`${window.location.origin}/i/${permission?.invitation}`}
             title={t("title")}
           >
             <Button variant="outline" size="sm" className="shrink-0 gap-1.5">
