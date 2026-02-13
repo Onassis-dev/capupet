@@ -15,5 +15,19 @@
   },
   "env": {
     "API_ORIGIN": "https://api.capupet.com"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "*.capu.pet/*",
+      "zone_name": "capu.pet"
+    },
+    {
+      "pattern": "capupet.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "capu.pet",
+      "custom_domain": true
+    }
+  ]
 }
