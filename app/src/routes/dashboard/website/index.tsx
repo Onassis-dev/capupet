@@ -180,7 +180,7 @@ export default function WebsitePage() {
                       "_blank"
                     );
                   } else {
-                    window.open(data?.slug + ".capu.pet", "_blank");
+                    window.open(`https://${data?.slug}.capu.pet`, "_blank");
                   }
                 }}
               >
@@ -198,7 +198,7 @@ export default function WebsitePage() {
                 {t("edit")}
               </Button>
               <Share
-                url={`${data?.slug}.capu.pet`}
+                url={`https://${data?.slug}.capu.pet`}
                 title={session?.user?.orgName || ""}
               >
                 <Button variant="secondary">

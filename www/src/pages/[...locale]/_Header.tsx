@@ -1,5 +1,6 @@
 import { Button } from "@workspace/ui/components/ui/button";
 import { useEffect, useState } from "react";
+import { APP_ORIGIN } from "@/lib/enviroment";
 
 type HeaderProps = {
   signInText: string;
@@ -32,10 +33,10 @@ export function Header({ signInText, startText }: HeaderProps) {
         <div></div>
         <div className="flex gap-2">
           <Button variant="ghost" asChild className="hidden sm:flex">
-            <a href="/">{signInText}</a>
+            <a href={`${APP_ORIGIN}`}>{signInText}</a>
           </Button>
           <Button asChild>
-            <a href="/signup">{startText}</a>
+            <a href={`${APP_ORIGIN}/signup`}>{startText}</a>
           </Button>
         </div>
       </div>

@@ -15,6 +15,7 @@ import {
   FileText,
   BarChart3,
 } from "lucide-react";
+import { APP_ORIGIN } from "@/lib/enviroment";
 
 export function Landing({ locale }: { locale: "es" | "en" }) {
   const t = serverI18n(locale, {
@@ -304,7 +305,7 @@ export function Landing({ locale }: { locale: "es" | "en" }) {
               {t("description")}
             </p>
             <Button className="mt-7" size="lg" asChild>
-              <a href="/signup">{t("getStarted")}</a>
+              <a href={`${APP_ORIGIN}/signup`}>{t("getStarted")}</a>
             </Button>
 
             <img
