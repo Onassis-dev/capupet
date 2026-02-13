@@ -14,13 +14,15 @@ import Ruler from "@lucide/astro/icons/ruler";
 import Scale from "@lucide/astro/icons/scale";
 import MailIcon from "@lucide/astro/icons/mail";
 import Calendar from "@lucide/astro/icons/calendar";
+import { API_ORIGIN } from "@/lib/enviroment";
+
 const { slug, id } = Astro.params;
 
 let website: any;
 
 try {
   const response = await fetch(
-    `${import.meta.env.API_ORIGIN}/public/pet?slug=${slug}&id=${id}`
+    `${API_ORIGIN}/public/pet?slug=${slug}&id=${id}`
   );
   if (!response.ok) throw new Error("Website not found");
   website = await response.json();

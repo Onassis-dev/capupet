@@ -2,15 +2,14 @@
 import UGCLayout from "@/layouts/UGCLayout.astro";
 import { MainUGC } from "../../../ugc/MainUGC.tsx";
 import UGCFooter from "@/layouts/UGCFooter.astro";
+import { API_ORIGIN } from "@/lib/enviroment";
 
 const { slug } = Astro.params;
 
 let website: any;
 
 try {
-  const response = await fetch(
-    `${import.meta.env.API_ORIGIN}/public/website?slug=${slug}`
-  );
+  const response = await fetch(`${API_ORIGIN}/public/website?slug=${slug}`);
   if (!response.ok) throw new Error("Website not found");
   website = await response.json();
 } catch (error) {
@@ -20,11 +19,6 @@ try {
 ---
 
 <UGCLayout website={website}>
-  <MainUGC
-    client:load
-    website={website}
-    apiOrigin={import.meta.env.API_ORIGIN}
-    slug={slug!}
-  />
+  <MainUGC client:load website={website} apiOrigin={API_ORIGIN} slug={slug!} />
   <UGCFooter website={website} />
 </UGCLayout>
