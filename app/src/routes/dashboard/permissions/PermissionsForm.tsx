@@ -45,8 +45,8 @@ export const PermissionsForm = ({
       en: "User",
     },
     registerUser: {
-      es: "Registrar usuario",
-      en: "Register user",
+      es: "Invitar usuario",
+      en: "Invite user",
     },
     editUser: {
       es: "Editar usuario",

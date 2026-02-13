@@ -13,22 +13,14 @@ export const invitationsRoute = new Hono<{ Variables: Variables }>().get(
   async (c) => {
     const data = c.req.valid("query");
 
-    let invitation = null;
-    try {
-      [invitation] = await db
-        .select({
-          name: organizations.name,
-          id: organizations.id,
-        })
-        .from(permissions)
-        .leftJoin(
-          organizations,
-          eq(permissions.organizationId, organizations.id)
-        )
-        .where(eq(permissions.invitation, data.id));
-    } catch (error) {
-      return c.json(null);
-    }
+    const [invitation] = await db
+      .select({
+        name: organizations.name,
+        id: organizations.id,
+      })
+      .from(permissions)
+      .leftJoin(organizations, eq(permissions.organizationId, organizations.id))
+      .where(eq(permissions.invitation, data.id));
 
     if (!invitation) return c.json(null);
 

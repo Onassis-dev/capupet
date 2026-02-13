@@ -1,0 +1,1 @@
+ALTER TABLE "permissions" ALTER COLUMN "invitation" SET DATA TYPE text;

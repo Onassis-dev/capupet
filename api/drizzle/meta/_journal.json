@@ -218,6 +218,13 @@
       "when": 1770862579268,
       "tag": "0030_funny_wildside",
       "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "7",
+      "when": 1770954763566,
+      "tag": "0031_jittery_sinister_six",
+      "breakpoints": true
     }
   ]
 }

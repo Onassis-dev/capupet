@@ -1,5 +1,5 @@
 import { SQL, sql } from "drizzle-orm";
-import { serial, integer, uuid } from "drizzle-orm/pg-core";
+import { serial, integer } from "drizzle-orm/pg-core";
 import {
   pgTable,
   text,
@@ -108,7 +108,7 @@ export const permissions = pgTable(
     userId: text().references((): AnyPgColumn => users.id, {
       onDelete: "cascade",
     }),
-    invitation: uuid().unique(),
+    invitation: text().unique(),
     organizationId,
     createdAt: timestamp().notNull().defaultNow(),
     ...permissionsList,

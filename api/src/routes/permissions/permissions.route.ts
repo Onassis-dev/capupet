@@ -10,9 +10,9 @@ import {
   selectPermissionsSchema,
 } from "./permissions.schema";
 import { organizations, permissions, users } from "../../db/auth.db";
-import { randomUUIDv7 } from "bun";
 import { deleteSchema } from "../../lib/schemas";
 import { sendError } from "../../lib/errors";
+import { generateCode } from "../../lib/codes";
 
 export const permissionsRoute = new Hono<{ Variables: Variables }>()
   .use(checkPermission("users"))
@@ -50,7 +50,7 @@ export const permissionsRoute = new Hono<{ Variables: Variables }>()
     await db.insert(permissions).values({
       ...data,
       organizationId: c.get("orgId"),
-      invitation: randomUUIDv7(),
+      invitation: generateCode(),
     });
 
     return c.json({});
