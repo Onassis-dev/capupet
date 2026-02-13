@@ -12,6 +12,7 @@ import {
 import { ugcI18n } from "./ugc-i18n";
 import type { Website } from "./types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { DEV } from "@/lib/enviroment";
 
 interface Props {
   website: Website;
@@ -146,7 +147,7 @@ export const MainUGC = ({ website, apiOrigin, slug }: Props) => {
               <div className={listStyle(website.style)}>
                 {pets.map((pet) => (
                   <a
-                    href={`/ugc/${slug}/${pet.id}`}
+                    href={`/${pet.id}`}
                     key={pet.id}
                     className={cardStyle(website.style)}
                   >
