@@ -107,12 +107,7 @@ export default function TasksPage() {
             title: "",
             transform: (done, row) => (
               <button
-                className={cn(
-                  "size-5 rounded-full cursor-pointer border-2 flex items-center justify-center",
-                  done
-                    ? "bg-foreground text-background border-0"
-                    : "border-input"
-                )}
+                className="cursor-pointer flex items-center justify-center size-9"
                 onClick={async (e) => {
                   e.stopPropagation();
 
@@ -124,7 +119,18 @@ export default function TasksPage() {
                   client.invalidateQueries({ queryKey: ["tasks"] });
                 }}
               >
-                {done ? <CheckIcon className="size-3" strokeWidth={3} /> : null}
+                <div
+                  className={cn(
+                    "flex items-center justify-center size-5 rounded-full border-2",
+                    done
+                      ? "bg-foreground text-background border-0"
+                      : "border-input"
+                  )}
+                >
+                  {done ? (
+                    <CheckIcon className="size-3" strokeWidth={3} />
+                  ) : null}
+                </div>
               </button>
             ),
           },
