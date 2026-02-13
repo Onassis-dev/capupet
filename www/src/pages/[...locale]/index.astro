@@ -3,8 +3,6 @@ import LandingLayout from "@/layouts/LandingLayout.astro";
 import { Landing } from "./_Landing";
 import { redirectToLocale, isLocaleValid } from "@/lib/locale";
 
-console.log("[INDEX]");
-
 if (!isLocaleValid(Astro)) return Astro.redirect(redirectToLocale(Astro));
 const locale = Astro.params.locale!;
 if (locale !== "es" && locale !== "en") return Astro.redirect("/en");
