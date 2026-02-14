@@ -23,6 +23,7 @@ export const petsRoute = new Hono<{ Variables: Variables }>()
   .get("/", validator("query", selectPetsSchema), async (c) => {
     const data = c.req.valid("query");
 
+    console.time("petsSQL");
     const rows = await db
       .select({
         id: pets.id,
@@ -44,6 +45,7 @@ export const petsRoute = new Hono<{ Variables: Variables }>()
       .limit(10)
       .offset((data.page - 1) * 10)
       .orderBy(desc(pets.id));
+    console.timeEnd("petsSQL");
 
     return c.json({
       rows,
@@ -52,11 +54,13 @@ export const petsRoute = new Hono<{ Variables: Variables }>()
   })
 
   .get("/adopters", async (c) => {
+    console.time("adoptersSQL");
     const rows = await db
       .select({ id: adopters.id, name: adopters.name })
       .from(adopters)
       .where(eq(adopters.organizationId, c.get("orgId")))
       .orderBy(desc(adopters.id));
+    console.timeEnd("adoptersSQL");
 
     return c.json(rows);
   })

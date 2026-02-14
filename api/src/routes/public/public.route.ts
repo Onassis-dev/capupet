@@ -16,6 +16,7 @@ export const publicRoute = new Hono()
   .get("/website", validator("query", publicWebsiteSchema), async (c) => {
     const data = c.req.valid("query");
 
+    console.time("website");
     const [website] = await db
       .select({
         title: organizations.name,
@@ -41,6 +42,7 @@ export const publicRoute = new Hono()
     if (!website) return c.json({}, 404);
 
     if (website?.image) website.image = s3.presign(website.image);
+    console.timeEnd("website");
 
     if (!website) return c.json({}, 404);
     return c.json(website);
@@ -49,6 +51,7 @@ export const publicRoute = new Hono()
   .get("/pets", validator("query", publicPetsSchema), async (c) => {
     const data = c.req.valid("query");
 
+    console.time("pets");
     const petsArray = await db
       .select({
         count: sql<number>`count(*) OVER()::integer as count`,
@@ -71,6 +74,7 @@ export const publicRoute = new Hono()
       )
       .limit(12)
       .offset((data.page - 1) * 12);
+    console.timeEnd("pets");
 
     return c.json(
       petsArray.map((pet) => ({
@@ -83,6 +87,7 @@ export const publicRoute = new Hono()
   .get("/pet", validator("query", publicPetSchema), async (c) => {
     const data = c.req.valid("query");
 
+    console.time("pet");
     const [website] = await db
       .select({
         title: organizations.name,
@@ -132,6 +137,6 @@ export const publicRoute = new Hono()
         s3.presign(image)
       );
     }
-
+    console.timeEnd("pet");
     return c.json(website);
   });
